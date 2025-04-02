@@ -1,18 +1,32 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import StartPage from './Components/StartPage';
-import Game from './Components/Game';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Level from "./Components/Level";
+import LevelResult from "./Components/LevelResult";
+import StartPage from "./Components/StartPage";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/" element={<StartPage/>} />
-        <Route path="/game" element={<Game/>} />
+        {/* Root Route */}
+        <Route path="/" element={<StartPage />} />
+
+        {/* Level Route */}
+        <Route path="/level" element={<Level />} />
+
+        {/* Protected LevelResult Route */}
+        <Route
+          path="/level-result"
+          element={
+            <ProtectedRoute alertMessage="You must complete the level before viewing the results.">
+              <LevelResult />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>  
+    </Router>
   );
-}
+};
 
 export default App;
-

@@ -14,7 +14,7 @@ const StartPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`, // Ensure you have your API key set in your environment variables
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
         body: JSON.stringify({
           model: "mistral-small-latest",
@@ -35,19 +35,35 @@ const StartPage = () => {
 
       const data = await response.json();
       const generatedText = data.choices?.[0]?.message?.content || "Error generating sentence.";
-      navigate("/game", { state: { sentence: generatedText } });
+      navigate("/level", { state: { sentence: generatedText } });
     } catch (error) {
       console.error("Error fetching sentence:", error);
-      navigate("/game", { state: { sentence: "Error generating sentence." } });
+      navigate("/level", { state: { sentence: "Error generating sentence." } });
     }
   };
 
   return (
     <div className="start-page">
-      <img src={PhonexaLogo} alt="Phonexa Logo" className="logo" />
-      <h1 className="title">Phonexa</h1>
-      <p className="score">Highest Score: 0</p>
-      <button className="start-button" onClick={fetchSentence}>START</button>
+      <div className="start-card">
+        <img src={PhonexaLogo} alt="Phonexa Logo" className="logo" />
+        <h1 className="title">Phonexa</h1>
+        <h2 className="subtitle">A.I Pronunciation Game</h2>
+        <p className="score">Highest Score: 0</p>
+
+        {/* Instructions Section */}
+        <div className="instructions-box">
+          <h2>How to Play</h2>
+          <ol>
+            <li>Click the "START" button to begin the game.</li>
+            <li>Read the sentence displayed on the screen.</li>
+            <li>Record your pronunciation using the microphone button.</li>
+            <li>Submit your recording to receive feedback and a score.</li>
+            <li>Retry or move to the next level to improve your skills!</li>
+          </ol>
+        </div>
+
+        <button className="start-button" onClick={fetchSentence}>START</button>
+      </div>
     </div>
   );
 };
