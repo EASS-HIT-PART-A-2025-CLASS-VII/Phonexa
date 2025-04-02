@@ -1,0 +1,106 @@
+/* General Layout */
+.game-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #E9DCD3;
+    padding: 20px;
+  }
+  
+  .result-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: -20px; /* Add margin to the top */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Title and Score */
+  .title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .score {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  
+  .score span {
+    font-weight: bold;
+  }
+  
+  /* Feedback Section */
+  .feedback-box {
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    color: #333;
+    font-size: 1.1em;
+    text-align: left;
+  }
+  
+  /* Sentence Section */
+  .sentence-text {
+    font-size: 1.2em;
+    font-style: italic;
+    margin: 10px 0 20px;
+    color: #555;
+  }
+  
+  
+  /* Recording Section */
+  .recording-container {
+    margin-top: 20px;
+  }
+  
+  .recording-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .audio-player {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  /* Buttons */
+  .result-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+  
+  .retry-button,
+  .next-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .retry-button:hover,
+  .next-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .retry-button:active,
+  .next-button:active {
+    transform: scale(0.95);
+  }
