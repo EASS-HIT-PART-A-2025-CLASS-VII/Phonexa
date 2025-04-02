@@ -1,106 +1,141 @@
 /* General Layout */
 .game-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #E9DCD3;
-    padding: 20px;
-  }
-  
-  .result-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    margin-top: -20px; /* Add margin to the top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Title and Score */
-  .title {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .score {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: #007bff;
-  }
-  
-  .score span {
-    font-weight: bold;
-  }
-  
-  /* Feedback Section */
-  .feedback-box {
-    margin: 20px auto;
-    padding: 20px;
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    background-color: #f0f8ff;
-    color: #333;
-    font-size: 1.1em;
-    text-align: left;
-  }
-  
-  /* Sentence Section */
-  .sentence-text {
-    font-size: 1.2em;
-    font-style: italic;
-    margin: 10px 0 20px;
-    color: #555;
-  }
-  
-  
-  /* Recording Section */
-  .recording-container {
-    margin-top: 20px;
-  }
-  
-  .recording-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .audio-player {
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  /* Buttons */
-  .result-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-  }
-  
-  .retry-button,
-  .next-button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .retry-button:hover,
-  .next-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
-  .retry-button:active,
-  .next-button:active {
-    transform: scale(0.95);
-  }
+.result-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Title and Score */
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.score {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.score span {
+  font-weight: bold;
+}
+
+/* Feedback Section */
+.feedback-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  background-color: #f0f8ff;
+  padding: 20px;
+  margin: 20px auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.feedback-text {
+  flex: 1;
+  font-size: 1.1em;
+  color: #333;
+  text-align: left;
+  margin-right: 10px;
+}
+
+/* Sentence Section */
+.sentence-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 20px auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.sentence-text {
+  flex: 1;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #555;
+  text-align: left;
+  margin-right: 10px; 
+
+}
+
+/* Speaker Button */
+.speaker-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex; /* Ensure the button is treated as a flex container */
+  align-items: center; /* Center the image inside the button */
+}
+
+.speaker-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Recording Section */
+.recording-container {
+  margin-top: 20px;
+}
+
+.recording-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.audio-player {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.result-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.retry-button,
+.next-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.retry-button:hover,
+.next-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.retry-button:active,
+.next-button:active {
+  transform: scale(0.95);
+}
