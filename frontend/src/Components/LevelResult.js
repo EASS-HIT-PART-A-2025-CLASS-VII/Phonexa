@@ -98,21 +98,32 @@ const LevelResult = () => {
         <h1 className="title">Your Results</h1>
         <p className="score">Score: <span>{score}/100</span></p>
 
-        {/* Feedback Section */}
-        <h2>Feedback:</h2>
-        <div className="feedback-box">
-          <p className="feedback-text">{feedback}</p>
-          <button className="speaker-button" onClick={() => playTextToSpeech(feedback)}>
-            <img src={SpeakerIcon} alt="Play Feedback" />
-          </button>
-        </div>
-
         {/* Sentence Section */}
         <h2>Sentence:</h2>
         <div className="sentence-container">
-          <p className="sentence-text">{sentence}</p>
+          <p
+            className="sentence-text"
+            dangerouslySetInnerHTML={{ __html: sentence }} // Render HTML tags
+          ></p>
           <button className="speaker-button" onClick={() => playTextToSpeech(sentence)}>
             <img src={SpeakerIcon} alt="Play Sentence" />
+          </button>
+        </div>
+
+        {/* Feedback Section */}
+        <h2>Feedback:</h2>
+        <div className="feedback-box">
+          <ul className="feedback-list">
+            {feedback.split("\n").map((line, index) => (
+              <li
+                key={index}
+                className="feedback-item"
+                dangerouslySetInnerHTML={{ __html: line }} // Render HTML for each feedback line
+              ></li>
+            ))}
+          </ul>
+          <button className="speaker-button" onClick={() => playTextToSpeech(feedback)}>
+            <img src={SpeakerIcon} alt="Play Feedback" />
           </button>
         </div>
 
