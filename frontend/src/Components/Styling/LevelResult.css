@@ -50,23 +50,29 @@
   overflow-wrap: break-word;
 }
 
-.feedback-text {
-  flex: 1;
+/* Feedback List */
+.feedback-list {
+  list-style-type: disc; /* Use bullet points */
+  padding-left: 20px; /* Add padding to align bullets */
+  margin: 0;
+}
+
+.feedback-item {
   font-size: 1.1em;
   color: #333;
-  text-align: left;
-  margin-right: 10px;
+  margin-bottom: 10px; /* Add spacing between bullet points */
+  line-height: 1.5; /* Improve readability */
 }
 
 /* Sentence Section */
 .sentence-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: center; /* Vertically centers content */
+  justify-content: center; /* Horizontally centers content */
   padding: 20px;
-  margin: 20px auto;
+  margin-top: -100px;
+  margin: -50px auto;
   word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 .sentence-text {

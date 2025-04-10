@@ -74,12 +74,28 @@ const Level = () => {
 
       if (response.ok) {
         const data = await response.json();
+  
+        // Extract the content from the LLM response
+        const contentString = data.choices?.[0]?.message?.content;
+        if (!contentString) {
+          throw new Error("Invalid response format: Missing 'content' attribute.");
+        }
+  
+        // Parse the content string into a JSON object
+        const parsedContent = JSON.parse(contentString);
+  
+        // Extract and process the response content
+        const score = parsedContent.score;
+        const feedback = parsedContent.try_saying.join("\n"); // Combine feedback lines into one string
+        const sentence = parsedContent.highlighted_sentence.replace(/\\/g, ""); // Remove redundant slashes
+  
+        // Navigate to the next page with the processed data
         navigate("/level-result", {
           state: {
             canAccess: true,
-            score: data.score,
-            feedback: data.feedback,
-            sentence,
+            score: score,
+            feedback: feedback,
+            sentence: sentence,
             audioBlob,
           },
         });
@@ -97,7 +113,7 @@ const Level = () => {
         <h1 className="title">Pronunciation Game</h1>
         <p className="instructions">Read the following sentence:</p>
         <div className="sentence-box">
-          <h2 className="sentence-text">{sentence}</h2>
+          <h2 className="sentence-text" dangerouslySetInnerHTML={{ __html: sentence }}></h2>
         </div>
   
         <div className="recording-container">
