@@ -30,56 +30,47 @@ def convert_to_wav(input_path, output_path):
     except subprocess.CalledProcessError as e:
         raise ValueError(f"Failed to convert file to WAV: {e}")
 
-async def convert_audio_file(audio):
+async def convert_audio_file(audio_path):
     """
-    Converts an uploaded audio file to phoneme transcription.
-
-    Parameters:
-    audio (UploadFile): The uploaded audio file.
-
-    Returns:
-    dict: A dictionary containing the phoneme transcription.
+    Reads the audio file, converts it to WAV if needed, and transcribes to phonemes.
     """
-    audio_path = f"temp_{audio.filename}"
-    wav_path = f"converted_{audio.filename}.wav"
+    wav_path = f"converted_{os.path.basename(audio_path)}.wav"
     try:
-        print(f"Saving audio file: {audio.filename}")
-        with open(audio_path, "wb") as f:
-            f.write(await audio.read())
-
-        print(f"Audio file saved at: {audio_path}")
+        print(f"Processing audio file: {audio_path}")
 
         # Convert to WAV if necessary
         convert_to_wav(audio_path, wav_path)
-        phonemes = transcribe_audio_to_phonemes(wav_path)
+        print(f"Converted audio file to WAV: {wav_path}")
 
-        print(f"Phoneme transcription: {phonemes}")
+        # Instead of reading from file again, load the audio data immediately
+        print(f"Loading audio from file: {wav_path}")
+        audio_input, sample_rate = sf.read(wav_path)
+        print("Loaded audio, performing transcription...")
+
+        phonemes = transcribe_audio_to_phonemes_from_array(audio_input, sample_rate)
+
         return {"phonemes": phonemes}
     except Exception as e:
         print(f"Error in convert_audio_file: {e}")
         raise
     finally:
-        if os.path.exists(audio_path):
-            os.remove(audio_path)
         if os.path.exists(wav_path):
             os.remove(wav_path)
 
-def transcribe_audio_to_phonemes(audio_file_path):
+def transcribe_audio_to_phonemes_from_array(audio_input, sample_rate):
     """
-    Transcribes an audio file to its phoneme representation using a pre-trained Wav2Vec2 model.
+    Transcribes audio (as a numpy array) to its phoneme representation
+    using the pre-trained Wav2Vec2 model.
 
     Parameters:
-    audio_file_path (str): Path to the audio file to be transcribed.
+    audio_input (np.array): Audio signal.
+    sample_rate (int): Sampling rate of the audio.
 
     Returns:
-    str: Transcribed phoneme sequence.
+    list: Array of phonemes.
     """
     try:
-        # Load the audio file
-        print(f"Loading audio file: {audio_file_path}")
-        audio_input, sample_rate = sf.read(audio_file_path)
-
-        # Process the audio input
+        # Process the audio input directly
         input_values = processor(audio_input, sampling_rate=sample_rate, return_tensors="pt").input_values.to(device)
 
         # Perform inference to get logits
@@ -90,7 +81,10 @@ def transcribe_audio_to_phonemes(audio_file_path):
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = processor.batch_decode(predicted_ids)[0]
 
-        return transcription
+        # Split the transcription into an array of phonemes
+        phonemes = transcription.split()
+
+        return phonemes
     except Exception as e:
-        print(f"Error in transcribe_audio_to_phonemes: {e}")
+        print(f"Error in transcribe_audio_to_phonemes_from_array: {e}")
         raise

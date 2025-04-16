@@ -1,4 +1,11 @@
 fastapi
 uvicorn
 python-multipart
+soundfile
+requests
+python-dotenv
 edge-tts
+torch
+transformers
+phonemizer
+protobuf

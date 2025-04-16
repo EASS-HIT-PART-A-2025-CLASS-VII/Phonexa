@@ -19,26 +19,30 @@ const StartPage = () => {
         body: JSON.stringify({
           model: "mistral-small-latest",
           messages: [
-            { role: "system", content: "You are a sentence generating machine, that provides no further context" },
-            { role: "user", content: "Generate a random basic sentence for pronunciation evaluation," },
+        { role: "system", content: "You are aמ English sentence generating machine that provides a JSON object containing a sentence and its IPA (International Phonetic Alphabet) representation with spaces. Ensure the response is a valid JSON object without any additional symbols or formatting." },
+        { role: "user", content: "Generate a random basic sentence for pronunciation evaluation and its IPA representation. Ensure the response is a valid JSON object without any irrelevant symbols or formatting, ensure the json field names are sentence and sentence_ipa" },
           ],
           temperature: 0.7,
-          max_tokens: 50,
+          max_tokens: 100,
           top_p: 1.0,
           stream: false,
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       const data = await response.json();
-      const generatedText = data.choices?.[0]?.message?.content || "Error generating sentence.";
-      navigate("/level", { state: { sentence: generatedText } });
+      const generatedSentence = data.choices?.[0]?.message?.content || '{"sentence": "Error generating sentence.", "sentence_ipa": "Error generating IPA."}';
+      const parsedData = JSON.parse(generatedSentence);
+  
+      navigate("/level", { state: { sentence: parsedData.sentence, sentence_ipa: parsedData.sentence_ipa } });
     } catch (error) {
       console.error("Error fetching sentence:", error);
-      navigate("/level", { state: { sentence: "Error generating sentence." } });
+  
+      // Navigate to the level page with error state
+      navigate("/level", { state: { sentence: "Error generating sentence.", sentence_ipa: "Error generating IPA." } });
     }
   };
 

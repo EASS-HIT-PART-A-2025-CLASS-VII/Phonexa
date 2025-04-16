@@ -42,4 +42,10 @@ __pycache__/
 
 # Ignore virtual environment
 venv/
+phonexa_env/
+
+# Ignore test files
+*.wav
+backend/services/gentle_alignment.json
+backend/services/wav2vec_transcription.json
 
