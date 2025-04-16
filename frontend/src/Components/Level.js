@@ -6,6 +6,7 @@ import "./Styling/Level.css";
 const Level = () => {
   const location = useLocation();
   const sentence = location.state?.sentence || "No sentence provided.";
+  const sentenceIPA = location.state?.sentence_ipa || "No IPA provided.";
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState("");
@@ -64,6 +65,7 @@ const Level = () => {
 
     const formData = new FormData();
     formData.append("sentence", sentence);
+    formData.append ("sentenceIPA", sentenceIPA)
     formData.append("audio", audioBlob, "recording.wav");
 
     try {
