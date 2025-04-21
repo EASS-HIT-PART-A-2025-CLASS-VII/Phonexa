@@ -24,25 +24,19 @@ def analyze_pronunciation_with_llm(alignment_results):
     )
 
     user_message = (
-        f"Provide feedback for the user's pronunciation based on the following:\n\n"
-        f"Alignment Results: {alignment_results}\n"
-
-
+        f"Analyze the pronunciation alignment data below and generate feedback:\n\n"
+        f"```json\n{alignment_results}\n```\n\n"
         "Instructions:\n"
-        " * Locate up to the three of the most incorrect words in the user's phoneme transcription.\n"
-        " * If the phoneme transcription is perfectly matching (no difference to sentence phonemes), The feedback array will contain a single string saying 'PERFECT!' and the score will be 100.\n"
-
-        "Return a JSON object with 3 keys:\n"
-        "   - \"highlighted_sentence\": The original sentence with incorrect words wrapped in red HTML colour tag.\n"
-        "   - \"try_saying\": The feedback array, each try_saying format:  'Try saying <font color = 'green'>{correct phonemes of the word}</font> instead of <font color = 'red'>{user incorrect phenomes representing word attempt}</font>' \n"
-        "   - \"score\": A number from 0 to 100.\n\n"
-
-        "STRICT RULES:\n"
-        "- Do NOT wrap the JSON in backticks.\n"
-        "- Do NOT include any text outside the JSON.\n"
-        "- Review try_saying array strictly, if one of the sentences IPA's identical, scrape it off the array.\n"
+        "1.  **Identify Errors:** Compare `IPA_word` and `user_phonemes` for each word. Find up to 3 words where they differ.\n"
+        "2.  **Calculate Score:** Score is 100 if no errors found. Otherwise, score is `max(0, 100 - (number_of_error_words * 15))`.\n"
+        "3.  **Generate JSON Output:** Create a JSON object with these exact keys:\n"
+        "    *   `\"score\"`: The calculated score (number).\n"
+        "    *   `\"highlighted_sentence\"`: The original `sentence` string, wrapping the English words corresponding to the identified errors in `<font color='red'>...</font>`.\n"
+        "    *   `\"try_saying\"`: An array. If score is 100, it contains `[\"PERFECT!\"]`. Otherwise, it contains one string per error word (max 3), formatted exactly as: `'Try saying <font color='green'>{IPA_word}</font> instead of <font color='red'>{user_phonemes joined}</font>'`. **Only include entries for actual differences.**\n\n"
+        "**Output Requirements:**\n"
+        "- Return ONLY the raw JSON object.\n"
+        "- Ensure `try_saying` only contains feedback for actual errors or \"PERFECT!\"."
     )
-
       # API call to Together's Llama-3-70B-Instruct-Turbo-Free
     try:
         response = requests.post(
@@ -57,7 +51,7 @@ def analyze_pronunciation_with_llm(alignment_results):
                     {"role": "system", "content": system_message},
                     {"role": "user", "content": user_message}
                 ],
-                "temperature": 0.7,
+                "temperature": 0.5,
                 "max_tokens": 500,
                 "top_p": 1.0,
                 "stream": False
