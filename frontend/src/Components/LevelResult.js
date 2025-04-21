@@ -29,7 +29,7 @@ const LevelResult = () => {
           model: "mistral-small-latest",
           messages: [
             { role: "system", content: "You are a sentence generating machine, that provides no further context" },
-            { role: "user", content: `Generate an advanced sentence based on the following feedback: ${feedback}` },
+            { role: "user", content: `Generate an advanced, new sentence based on the following feedback: ${feedback}` },
           ],
           temperature: 0.7,
           max_tokens: 50,

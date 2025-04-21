@@ -311,7 +311,11 @@ def transcribe_audio_to_phonemes_from_array(audio_input, sample_rate, sentenceIP
         phonemes = transcription.split()
         ipa_word_phonemes = tokenize_ipa(sentenceIPA)
         word_alignments = align_words_to_phonemes_dp(ipa_word_phonemes, phonemes)
+        # We want to join the user_phonemes for each word
+        for entry in word_alignments:
+            entry["user_phonemes"] = ''.join(entry["user_phonemes"])
         return {
+            "sentenceIPA": sentenceIPA,
             "phonemes": phonemes,
             "word_alignments": word_alignments
         }
@@ -324,11 +328,8 @@ def tokenize_ipa(ipa_text):
     """
     Properly tokenize IPA text, preserving multi-character phonemes
     """
-    # Define multi-character IPA symbols to preserve (add more as needed)
-    multi_char_symbols = [
-        'ɑː', 'iː', 'uː', 'eɪ', 'aɪ', 'ɔɪ', 'aʊ', 'oʊ', 'ɑːɹ', 'əl',
-        'tʃ', 'dʒ', 'ʃ', 'ʒ', 'θ', 'ð', 'ŋ'
-    ]
+    # Define multi-character IPA symbols based *directly* on IPA_FEATURES keys
+    multi_char_symbols = [k for k in IPA_FEATURES.keys() if len(k) > 1]
     
     # Sort by length (descending) to prioritize longer matches
     multi_char_symbols.sort(key=len, reverse=True)
