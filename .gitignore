@@ -46,6 +46,7 @@ phonexa_env/
 
 # Ignore test files
 *.wav
+*output.wav
 backend/services/gentle_alignment.json
 backend/services/wav2vec_transcription.json
 

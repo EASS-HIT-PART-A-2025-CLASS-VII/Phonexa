@@ -22,13 +22,12 @@ async def analyze_audio(
         with open(transcript_path, "w") as f:
             f.write(sentence)
 
-        wav2vec_result = await convert_audio_file(audio_path, sentenceIPA)
-        wav2vec_result["sentence"] = sentence # Add the original sentence to the result
-        
+        wav2vec_result = await convert_audio_file(audio_path, sentenceIPA, sentence)        
 
         wav2vec_output_path = os.path.join("services", "wav2vec_transcription.json")
         with open(wav2vec_output_path, "w") as f:
             json.dump(wav2vec_result, f, indent=4)
+            
         print("Wav2Vec Transcription Results:", wav2vec_result)
 
         
