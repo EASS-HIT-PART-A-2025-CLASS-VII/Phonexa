@@ -55,23 +55,27 @@
   list-style-type: disc; /* Use bullet points */
   padding-left: 20px; /* Add padding to align bullets */
   margin: 0;
+  flex: 1; /* Allow the list to take available space */
 }
 
 .feedback-item {
-  font-size: 1.1em;
-  color: #333;
-  margin-bottom: 10px; /* Add spacing between bullet points */
-  line-height: 1.5; /* Improve readability */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding-right: 0; /* Remove extra padding if present */
+  white-space: nowrap; /* Prevent items from wrapping */
+  overflow: hidden; /* Hide overflow if necessary */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
 }
 
 /* Sentence Section */
 .sentence-container {
   display: flex;
   align-items: center; /* Vertically centers content */
-  justify-content: center; /* Horizontally centers content */
+  justify-content: space-between; /* Space between text and button */
   padding: 20px;
-  margin-top: -100px;
-  margin: -50px auto;
+  margin: 0 auto;
   word-wrap: break-word;
 }
 
@@ -81,18 +85,21 @@
   font-style: italic;
   color: #555;
   text-align: left;
-  margin-right: 10px; 
-
+  margin-right: 10px;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow if necessary */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  display: inline-block; /* Ensure it stays inline with the button */
 }
 
 /* Speaker Button */
 .speaker-button {
+  margin-left: auto; /* Push the button to the far right */
+  padding: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
-  display: flex; /* Ensure the button is treated as a flex container */
-  align-items: center; /* Center the image inside the button */
+  align-self: center; /* Align the button to the center */
 }
 
 .speaker-button img {

@@ -104,42 +104,46 @@ const LevelResult = () => {
           <p
             className="sentence-text"
             dangerouslySetInnerHTML={{ __html: sentence }} // Render HTML tags
-          ></p>
-          <button className="speaker-button" onClick={() => playTextToSpeech(sentence)}>
+            ></p>
+            <button className="speaker-button" onClick={() => playTextToSpeech(sentence)}>
             <img src={SpeakerIcon} alt="Play Sentence" />
-          </button>
-        </div>
+            </button>
+            </div>
 
-        {/* Feedback Section */}
-        <h2>Feedback:</h2>
-        <div className="feedback-box">
-          <ul className="feedback-list">
-            {feedback.split("\n").map((line, index) => (
-              <li
-                key={index}
-                className="feedback-item"
-                dangerouslySetInnerHTML={{ __html: line }} // Render HTML for each feedback line
-              ></li>
-            ))}
-          </ul>
-          <button className="speaker-button" onClick={() => playTextToSpeech(feedback)}>
-            <img src={SpeakerIcon} alt="Play Feedback" />
-          </button>
-        </div>
+            {/* Feedback Section */}
+            <h2>Feedback:</h2>
+            <div className="feedback-box">
+              <ul className="feedback-list">
+              {feedback.split("\n").map((line, index) => (
+                <li key={index} className="feedback-item">
+                  <span
+                    className="feedback-text"
+                    dangerouslySetInnerHTML={{ __html: line }}
+                  />
+                  <button
+                    className="speaker-button"
+                    onClick={() => playTextToSpeech(line)}
+                  >
+                    <img src={SpeakerIcon} alt="Play Feedback" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+            </div>
 
-        {/* Recording Section */}
-        <div className="recording-container">
-          <h2 className="recording-title">Your Attempt</h2>
-          {audioBlob ? (
+            {/* Recording Section */}
+          <div className="recording-container">
+            <h2 className="recording-title">Your Attempt</h2>
+            {audioBlob ? (
             <audio controls src={URL.createObjectURL(audioBlob)} className="audio-player">
               Your browser does not support the audio element.
             </audio>
-          ) : (
+            ) : (
             <p>No audio available.</p>
-          )}
-        </div>
+            )}
+          </div>
 
-        {/* Buttons */}
+          {/* Buttons */}
         <div className="result-actions">
           <button className="retry-button" onClick={retryLevel}>
             Retry

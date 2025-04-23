@@ -10,3 +10,5 @@ transformers
 phonemizer
 protobuf
 numpy
+httpx
+aiofiles
