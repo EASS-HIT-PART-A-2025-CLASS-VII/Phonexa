@@ -2,7 +2,7 @@
 
 Phonexa is an interactive web application that helps users improve their English pronunciation through AI-based feedback. The app records your voice, analyzes your pronunciation, and provides specific guidance on how to improve.
 
-![Phonexa Logo](./frontend/src/ProjectImages/logo.png)
+![Phonexa Logo](https://github.com/EASS-HIT-PART-A-2025-CLASS-VII/Phonexa/blob/main/frontend/src/ProjectImages/PhonexaLogo.png?raw=true)
 
 ## Features
 
@@ -19,7 +19,7 @@ Phonexa is an interactive web application that helps users improve their English
 - **Backend**: FastAPI server with Wav2Vec2 for pronunciation analysis
 - **ML Model**: Facebook's wav2vec2-lv-60-espeak-cv-ft
 - **Containerization**: Docker & Docker Compose
-- **TTS**: Edge TTS for natural-sounding pronunciation examples
+- **TTS**: Edge TTS for natural-sounding pronunciation examples & and IPA-Reader.com for phonetic realizations
 
 ## Installation & Setup
 
@@ -85,5 +85,5 @@ MIT
 ## Credits
 
 - **Speech processing**: Facebook Wav2Vec2
-- **Text-to-Speech**: Edge TTS
+- **Text-to-Speech**: Edge TTS & IPA-Reader.com
 - **Phoneme Alignment**: Custom implementation based on dynamic programming designed by me, engineered with the help of LLM 
