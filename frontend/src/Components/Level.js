@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import PlayPauseButton from "../ProjectImages/playpausebtn.png";
 import "./Styling/Level.css";
+import { useEffect } from "react";
+
 
 const Level = () => {
   const location = useLocation();
@@ -12,6 +14,14 @@ const Level = () => {
   const [recordingStatus, setRecordingStatus] = useState("");
   const mediaRecorderRef = useRef(null);
   const navigate = useNavigate();
+  const [currentStreak, setCurrentStreak] = useState(
+    parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10)
+  );
+
+  useEffect(() => {
+    setCurrentStreak(parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10));
+  }, []);
+
 
   const toggleRecording = async () => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -63,6 +73,8 @@ const Level = () => {
       return;
     }
 
+    localStorage.setItem("phonexa_current_streak", (currentStreak + 1).toString());
+
     const formData = new FormData();
     formData.append("sentence", sentence);
     formData.append ("sentenceIPA", sentenceIPA)
@@ -88,7 +100,7 @@ const Level = () => {
   
         // Extract and process the response content
         const score = parsedContent.score;
-        const feedback = parsedContent.try_saying.join("\n"); // Combine feedback lines into one string
+        const feedback = parsedContent.try_saying
         const sentence = parsedContent.highlighted_sentence.replace(/\\/g, ""); // Remove redundant slashes
   
         // Navigate to the next page with the processed data
@@ -98,7 +110,7 @@ const Level = () => {
             score: score,
             feedback: feedback,
             sentence: sentence,
-            audioBlob,
+            audioBlob
           },
         });
       } else {
@@ -112,10 +124,11 @@ const Level = () => {
   return (
     <div className="game-page">
       <div className="level-card">
+      <div className="current-streak">Streak: {currentStreak}</div>
         <h1 className="title">Pronunciation Game</h1>
         <p className="instructions">Read the following sentence:</p>
         <div className="sentence-box">
-          <h2 className="sentence-text" dangerouslySetInnerHTML={{ __html: sentence }}></h2>
+          <div className="sentence-text" dangerouslySetInnerHTML={{ __html: sentence }}></div>
         </div>
   
         <div className="recording-container">

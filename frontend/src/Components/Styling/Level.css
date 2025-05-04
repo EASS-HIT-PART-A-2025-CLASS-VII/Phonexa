@@ -17,7 +17,19 @@
     max-width: 600px;
     width: 100%;
     text-align: center;
+    position: relative;
   }
+
+  /* current-streak */
+.current-streak {
+  font-size: 1em;
+  color: #555;
+  position: absolute;
+  top: 15px; /* Smaller value to position it at the top */
+  left: 15px; /* Smaller value to position it at the left */
+  text-align: left;
+  margin: 0;
+}
   
   /* Title and Instructions */
   .title {
@@ -41,14 +53,20 @@
     border: 2px solid #ccc;
     border-radius: 10px;
     background-color: #ffffff;
-    width: 80%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 800px;
+    min-height: 80px;
+    box-sizing: border-box;
+    overflow-wrap: break-word; /* Ensure long words break to next line */
+    word-break: break-word;    /* Prevent overflow on long words */
   }
-  
+
   .sentence-text {
     font-size: 1.5em;
     color: #333;
     white-space: pre-line;
+    overflow-wrap: break-word; /* Ensure text wraps within the box */
+    word-break: break-word;    /* Prevent overflow on long words */
   }
   
   /* Recording Section */

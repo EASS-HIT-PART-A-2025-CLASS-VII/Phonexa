@@ -7,9 +7,11 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from services.wav2vec_alignment import tokenize_ipa, align_words_to_phonemes_dp  # Import alignment functions
 
 MODEL_NAME = "facebook/wav2vec2-lv-60-espeak-cv-ft"
-print("Loading processor and model...")
-processor = Wav2Vec2Processor.from_pretrained(MODEL_NAME)
-model = Wav2Vec2ForCTC.from_pretrained(MODEL_NAME)
+MODEL_CACHE = os.environ.get("TRANSFORMERS_CACHE", None)
+
+print(f"Loading processor and model... Cache: {MODEL_CACHE}")
+processor = Wav2Vec2Processor.from_pretrained(MODEL_NAME, cache_dir=MODEL_CACHE)
+model = Wav2Vec2ForCTC.from_pretrained(MODEL_NAME, cache_dir=MODEL_CACHE)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 model.eval()
@@ -47,8 +49,9 @@ async def convert_audio_file(audio_path, sentenceIPA, sentence):
         print("Phonemes from the recording:\n", phonemes)
 
         ipa_word_phonemes = tokenize_ipa(sentenceIPA)
+        print("Tokenized IPA Sentence:\n", ipa_word_phonemes)
         word_alignments = align_words_to_phonemes_dp(ipa_word_phonemes, phonemes)
-        sentence_words = re.findall(r'\b\w+\b', sentence) # Extract words from the sentence
+        sentence_words = [re.sub(r"'", "", w) for w in re.findall(r"\b[\w']+\b", sentence)] # extract the words themselves
         for entry, word in zip(word_alignments, sentence_words):
             entry["user_phonemes"] = ''.join(entry["user_phonemes"])
             entry["word"] = word

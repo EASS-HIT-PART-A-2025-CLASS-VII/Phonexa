@@ -1,0 +1,22 @@
+# Exclude model cache directory
+model_cache/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+
+# Frontend files for backend build
+frontend/
+frontend/node_modules/
+frontend/build/
+
+# Development files
+.git/
+.github/
+.vscode/
+*.md
+*.log

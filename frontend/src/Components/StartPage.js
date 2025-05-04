@@ -4,9 +4,11 @@ import "@fontsource/poppins/400.css";
 import "./Styling/StartPage.css";
 import PhonexaLogo from "../ProjectImages/PhonexaLogo.png";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const StartPage = () => {
   const navigate = useNavigate();
+  const [highestStreak, setHighestStreak] = useState(0);
 
   const fetchSentence = async () => {
     try {
@@ -19,7 +21,7 @@ const StartPage = () => {
         body: JSON.stringify({
           model: "mistral-small-latest",
           messages: [
-        { role: "system", content: "You are aמ English sentence generating machine that provides a JSON object containing a sentence and its IPA (International Phonetic Alphabet) representation with spaces. Ensure the response is a valid JSON object without any additional symbols or formatting." },
+        { role: "system", content: "You are an English sentence generating machine that provides a JSON object containing a sentence and its IPA (International Phonetic Alphabet) representation with spaces. Ensure the response is a valid JSON object without any additional symbols or formatting." },
         { role: "user", content: "Generate a random basic sentence for pronunciation evaluation and its IPA representation. Ensure the response is a valid JSON object without any irrelevant symbols or formatting, ensure the json field names are sentence and sentence_ipa" },
           ],
           temperature: 0.7,
@@ -46,13 +48,30 @@ const StartPage = () => {
     }
   };
 
+  useEffect(() => {
+    const current = parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10);
+    const highest = parseInt(localStorage.getItem("phonexa_highest_streak") || "0", 10);
+
+    if (current > highest) {
+      localStorage.setItem("phonexa_highest_streak", current);
+      setHighestStreak(current);
+    } else {
+      setHighestStreak(highest);
+    }
+    localStorage.setItem("phonexa_current_streak", "0"); // Reset current streak
+    localStorage.setItem("phonexa_used_animals", "[]"); // Reset used animals
+  }, []);
+
+
+
+
   return (
     <div className="start-page">
       <div className="start-card">
         <img src={PhonexaLogo} alt="Phonexa Logo" className="logo" />
         <h1 className="title">Phonexa</h1>
         <h2 className="subtitle">A.I Pronunciation Game</h2>
-        <p className="score">Highest Score: 0</p>
+        <p className="score">Highest Streak: {highestStreak}</p>
 
         {/* Instructions Section */}
         <div className="instructions-box">

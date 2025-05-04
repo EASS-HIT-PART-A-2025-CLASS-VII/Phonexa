@@ -16,6 +16,7 @@
   max-width: 600px;
   width: 100%;
   text-align: center;
+  position: relative;
 }
 
 /* Title and Score */
@@ -29,7 +30,7 @@
 .score {
   font-size: 1.5em;
   margin-bottom: 20px;
-  color: #007bff;
+  color: #000000;
 }
 
 .score span {
@@ -67,6 +68,8 @@
   white-space: nowrap; /* Prevent items from wrapping */
   overflow: hidden; /* Hide overflow if necessary */
   text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  font-size: 125%; /* Increase the size of the item words by 25% */
+  letter-spacing: 0.05em; /* Add a bit more space between each word */
 }
 
 /* Sentence Section */
@@ -75,13 +78,18 @@
   align-items: center; /* Vertically centers content */
   justify-content: space-between; /* Space between text and button */
   padding: 20px;
-  margin: 0 auto;
+  border: 2px solid #007bff; /* Match feedback box border */
+  border-radius: 10px; /* Match feedback box border radius */
+  background-color: #f0f8ff; /* Match feedback box background color */
+  padding: 20px; /* Match feedback box padding */
+  margin: 20px auto; /* Match feedback box margin */
   word-wrap: break-word;
+  outline: none; /* Remove outline to match feedback box */
 }
 
 .sentence-text {
   flex: 1;
-  font-size: 1.2em;
+  font-size: 1.25em; /* Adjust font size for better readability */
   font-style: italic;
   color: #555;
   text-align: left;
@@ -151,4 +159,26 @@
 .retry-button:active,
 .next-button:active {
   transform: scale(0.95);
+}
+
+.word-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 2px;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+  vertical-align: baseline;
+  /* Remove outline for aesthetics, but keep for accessibility if needed */
+  outline: none;
+}
+
+.word-button.green {
+  color: green;
+}
+
+.word-button.red {
+  color: red;
 }

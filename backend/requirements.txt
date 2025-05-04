@@ -6,9 +6,8 @@ requests
 python-dotenv
 edge-tts
 torch
-transformers
-phonemizer
+transformers==4.51.3
 protobuf
 numpy
-httpx
-aiofiles
+pydantic
+phonemizer

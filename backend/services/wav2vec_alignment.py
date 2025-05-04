@@ -1,38 +1,45 @@
 import numpy as np
-import re
+
 
 # Enhanced IPA_FEATURES dictionary with expanded vocabulary
 IPA_FEATURES = {
     # Vowels
-    'ɪ': [1, 0, 0, 0, 0],
-    'i': [1, 0, 0, 0, 0],
-    'iː': [1, 0, 0, 0, 1],
-    'ɛ': [1, 2, 0, 0, 0],
-    'e': [1, 1, 0, 0, 0],
-    'æ': [1, 3, 0, 0, 0],
-    'ə': [1, 2, 1, 0, 0],
-    'ɚ': [1, 2, 1, 0, 0],
-    'ɐ': [1, 3, 1, 0, 0],
-    'ʌ': [1, 2, 2, 0, 0],
-    'ɑ': [1, 4, 2, 0, 0],
-    'ɑː': [1, 4, 2, 0, 1],
-    'ɒ': [1, 4, 2, 1, 0],
-    'ɔ': [1, 3, 2, 1, 0],
-    'ɔː': [1, 3, 2, 1, 1],
-    'ʊ': [1, 0, 2, 1, 0],
-    'u': [1, 0, 2, 1, 0],
-    'uː': [1, 0, 2, 1, 1],
-    'ᵻ': [1, 0, 1, 0, 0],
+    'ɪ': [1, 0, 1, 0, 0],  # Near-close near-front unrounded vowel
+    'i': [1, 0, 0, 0, 0],  # Close front unrounded vowel
+    'iː': [1, 0, 0, 0, 1], # Long close front unrounded vowel
+    'ɛ': [1, 2, 0, 0, 0],  # Open-mid front unrounded vowel
+    'e': [1, 1, 0, 0, 0],  # Close-mid front unrounded vowel
+    'æ': [1, 3, 0, 0, 0],  # Near-open front unrounded vowel
+    'ə': [1, 2, 1, 0, 0],  # Mid central vowel (schwa)
+    'ɚ': [1, 2, 1, 0, 1],  # R-colored schwa
+    'ɐ': [1, 3, 1, 0, 0],  # Near-open central vowel
+    'ʌ': [1, 2, 2, 0, 0],  # Open-mid back unrounded vowel
+    'ɑ': [1, 4, 2, 0, 0],  # Open back unrounded vowel
+    'ɑː': [1, 4, 2, 0, 1], # Long open back unrounded vowel
+    'ɒ': [1, 4, 2, 1, 0],  # Open back rounded vowel
+    'ɔ': [1, 3, 2, 1, 0],  # Open-mid back rounded vowel
+    'ɔː': [1, 3, 2, 1, 1], # Long open-mid back rounded vowel
+    'ʊ': [1, 0, 3, 1, 0],  # Near-close near-back rounded vowel
+    'u': [1, 0, 2, 1, 0],  # Close back rounded vowel
+    'uː': [1, 0, 2, 1, 1], # Long close back rounded vowel
+    'ᵻ': [1, 0, 1, 0, 0],  # Centralized i
+    'o': [1, 2, 2, 1, 0],  # Close-mid back rounded vowel
+    'a': [1, 4, 0, 0, 0],  # Open front unrounded vowel
+    'y': [1, 0, 0, 1, 0],  # Close front rounded vowel
+    'ø': [1, 1, 0, 1, 0],  # Close-mid front rounded vowel
+    'œ': [1, 2, 0, 1, 0],  # Open-mid front rounded vowel
+    'ɯ': [1, 0, 2, 0, 0],  # Close back unrounded vowel
     # Diphthongs
-    'eɪ': [1, 1, 0, 0, 0],
-    'aɪ': [1, 4, 0, 0, 0],
-    'ɔɪ': [1, 3, 2, 1, 0],
-    'aʊ': [1, 4, 2, 1, 0],
-    'oʊ': [1, 1, 2, 1, 0],
+    'eɪ': [1, 1, 0, 0, 3],  # Diphthong type 1
+    'aɪ': [1, 4, 0, 0, 3],  # Diphthong type 2
+    'ɔɪ': [1, 3, 2, 1, 3],  # Diphthong type 3
+    'aʊ': [1, 3, 2, 1, 3],  # Diphthong type 4 - adjusted height to be closer to oʊ
+    'oʊ': [1, 2, 2, 1, 3],  # Diphthong type 5 - adjusted height to be closer to aʊ
+    'əʊ': [1, 2, 1, 0, 3],  # Diphthong type 6
     # Rhoticized vowels
-    'ɑːɹ': [1, 4, 2, 0, 1],
-    'ɔːɹ': [1, 3, 2, 1, 1],
-    'ɝ': [1, 2, 1, 0, 0],
+    'ɑːɹ': [1, 4, 2, 0, 2], # Rhoticized long open back unrounded vowel
+    'ɔːɹ': [1, 3, 2, 1, 2], # Rhoticized long open-mid back rounded vowel
+    'ɝ': [1, 2, 1, 0, 2],   # Rhoticized mid central vowel
     # Consonants
     'p': [0, 0, 0, 0, 0],
     'b': [0, 0, 0, 1, 0],
@@ -167,6 +174,7 @@ def align_words_to_phonemes_dp(ipa_word_phonemes, predicted_phonemes, beam_width
         alignment.append({
             "IPA_word": ''.join(ref),
             "user_phonemes": hyp,
+            "similarity": similarity,
         })
         i -= 1
         j = k
@@ -196,4 +204,6 @@ def tokenize_ipa(ipa_text):
                 word_tokens.append(word[i])
                 i += 1
         tokens.append(word_tokens)
+    
+
     return tokens

@@ -16,11 +16,9 @@ async def analyze_audio(
     try:
         # Save input audio and transcript files
         audio_path = f"temp_{audio.filename}"
-        transcript_path = f"temp_{os.path.splitext(audio.filename)[0]}.txt"
         with open(audio_path, "wb") as f:
             f.write(await audio.read())
-        with open(transcript_path, "w") as f:
-            f.write(sentence)
+    
 
         wav2vec_result = await convert_audio_file(audio_path, sentenceIPA, sentence)        
 
