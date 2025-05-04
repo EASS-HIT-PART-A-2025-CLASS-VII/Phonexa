@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+venv/
+model_cache/
+
+# Development files
+.git/
+.github/
+.vscode/
+*.md
+*.log
