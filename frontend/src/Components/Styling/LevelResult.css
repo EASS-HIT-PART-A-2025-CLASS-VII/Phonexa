@@ -74,30 +74,28 @@
 
 /* Sentence Section */
 .sentence-container {
-  display: flex;
-  align-items: center; /* Vertically centers content */
-  justify-content: space-between; /* Space between text and button */
+  margin: 20px auto;
   padding: 20px;
-  border: 2px solid #007bff; /* Match feedback box border */
-  border-radius: 10px; /* Match feedback box border radius */
-  background-color: #f0f8ff; /* Match feedback box background color */
-  padding: 20px; /* Match feedback box padding */
-  margin: 20px auto; /* Match feedback box margin */
-  word-wrap: break-word;
-  outline: none; /* Remove outline to match feedback box */
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  background-color: #f0f8ff;
+  width: 100%;
+  max-width: 800px;
+  min-height: 80px;
+  box-sizing: border-box;
+  overflow-wrap: break-word; /* Ensure long words break to next line */
+  word-break: break-word;    /* Prevent overflow on long words */
+  position: relative; /* Needed for absolute positioning of the button */
 }
 
 .sentence-text {
-  flex: 1;
-  font-size: 1.25em; /* Adjust font size for better readability */
-  font-style: italic;
-  color: #555;
-  text-align: left;
-  margin-right: 10px;
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide overflow if necessary */
-  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
-  display: inline-block; /* Ensure it stays inline with the button */
+  font-size: 1.5em;
+  color: #333;
+  white-space: pre-line;
+  overflow-wrap: break-word; /* Ensure text wraps within the box */
+  word-break: break-word;    /* Prevent overflow on long words */
+  /* italic */
+  font-style: italic; 
 }
 
 /* Speaker Button */

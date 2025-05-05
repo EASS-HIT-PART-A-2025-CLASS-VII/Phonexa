@@ -3,6 +3,10 @@ import { useLocation, useNavigate} from "react-router-dom";
 import PlayPauseButton from "../ProjectImages/playpausebtn.png";
 import "./Styling/Level.css";
 import { useEffect } from "react";
+import { useTranslation } from "./useTranslation";
+import { useTTS } from './useTTS';
+import SpeakerIcon from "../ProjectImages/speaker.png";
+
 
 
 const Level = () => {
@@ -17,6 +21,14 @@ const Level = () => {
   const [currentStreak, setCurrentStreak] = useState(
     parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10)
   );
+  const { playTextToSpeech, isPlaying } = useTTS();
+
+  const {
+    translation,
+    showTranslation,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useTranslation();
 
   useEffect(() => {
     setCurrentStreak(parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10));
@@ -121,14 +133,29 @@ const Level = () => {
     }
   };
 
+
+
+
   return (
     <div className="game-page">
       <div className="level-card">
       <div className="current-streak">Streak: {currentStreak}</div>
         <h1 className="title">Pronunciation Game</h1>
         <p className="instructions">Read the following sentence:</p>
-        <div className="sentence-box">
+        <div
+          className="sentence-box"
+          onMouseEnter={() => handleMouseEnter(sentence)}
+          onMouseLeave={handleMouseLeave}
+          title={showTranslation && translation ? translation : ""}
+        >
           <div className="sentence-text" dangerouslySetInnerHTML={{ __html: sentence }}></div>
+          <button
+            className="speaker-button"
+            onClick={() => playTextToSpeech(sentence)}
+            
+          >
+            <img src={SpeakerIcon} alt="Speaker Icon" className="speaker-icon" />
+          </button>
         </div>
   
         <div className="recording-container">

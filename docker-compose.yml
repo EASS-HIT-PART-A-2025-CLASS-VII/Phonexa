@@ -9,7 +9,8 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
-      - ./model_cache:/app/model_cache 
+      - ./model_cache:/app/model_cache
+      - ./backend/services/wav2vec_transcription.json:/app/services/wav2vec_transcription.json
     environment:
       - PYTHONUNBUFFERED=1
       - TRANSFORMERS_CACHE=/app/model_cache

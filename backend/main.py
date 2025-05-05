@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import analysis, tts
+from routes import analysis, tts, translate
 
 app = FastAPI()
 
@@ -16,3 +16,4 @@ app.add_middleware(
 # Include routers
 app.include_router(analysis.router, prefix="/analysis", tags=["Analysis"])
 app.include_router(tts.router, prefix="/tts", tags=["Text-to-Speech"])
+app.include_router(translate.router, prefix="/translate", tags=["Translate"])

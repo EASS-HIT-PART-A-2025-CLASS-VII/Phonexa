@@ -17,5 +17,4 @@ ENV HF_HOME=/app/model_cache
 
 COPY . .
 
-# Pre-run script to download model if not in mounted volume
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

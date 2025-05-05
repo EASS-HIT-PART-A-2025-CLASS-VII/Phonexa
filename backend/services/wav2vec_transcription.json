@@ -1,0 +1,59 @@
+{
+    "sentence": "Elephants and giraffes roam freely in the vast savannah.",
+    "word_alignments": [
+        {
+            "IPA_word": "\u026al\u025bf\u0259nts",
+            "user_phonemes": "\u025bl\u026af\u0259nts",
+            "similarity": 82.0,
+            "word": "Elephants"
+        },
+        {
+            "IPA_word": "\u00e6nd",
+            "user_phonemes": "\u00e6nd",
+            "similarity": 100.0,
+            "word": "and"
+        },
+        {
+            "IPA_word": "d\u0292\u026ar\u00e6fs",
+            "user_phonemes": "d\u0292\u1d7b\u0279\u00e6fs",
+            "similarity": 100.0,
+            "word": "giraffes"
+        },
+        {
+            "IPA_word": "ro\u028am",
+            "user_phonemes": "\u0279o\u028am",
+            "similarity": 100.0,
+            "word": "roam"
+        },
+        {
+            "IPA_word": "fr\u026ali",
+            "user_phonemes": "f\u0279i\u02d0li",
+            "similarity": 96.0,
+            "word": "freely"
+        },
+        {
+            "IPA_word": "\u026an",
+            "user_phonemes": "\u026an",
+            "similarity": 100.0,
+            "word": "in"
+        },
+        {
+            "IPA_word": "\u00f0\u0259",
+            "user_phonemes": "\u00f0\u0259",
+            "similarity": 100.0,
+            "word": "the"
+        },
+        {
+            "IPA_word": "v\u00e6st",
+            "user_phonemes": "v\u00e6st",
+            "similarity": 100.0,
+            "word": "vast"
+        },
+        {
+            "IPA_word": "s\u0259v\u00e6n\u0259",
+            "user_phonemes": "s\u0259v\u00e6n\u0259",
+            "similarity": 100.0,
+            "word": "savannah"
+        }
+    ]
+}

@@ -4,16 +4,24 @@ import "./Styling/LevelResult.css";
 import SpeakerIcon from "../ProjectImages/speaker.png";
 import { useEffect } from "react";
 import { getNextLevelSentence } from './NextLevel';
+import { useTranslation } from "./useTranslation";
+import { useTTS, copyToClipboardAndRedirect } from './useTTS';
 
 const LevelResult = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { score = 0, feedback = "No feedback available.", sentence = "No sentence provided.", audioBlob } = location.state || {};
-  const [audio, setAudio] = useState(null); // State to manage the audio object
-  const [isPlaying, setIsPlaying] = useState(false); // State to track if audio is playing
   const [currentStreak, setCurrentStreak] = useState(
     parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10)
   );
+  const { playTextToSpeech, isPlaying } = useTTS();
+  
+  const {
+    translation,
+    showTranslation,
+    handleMouseEnter,
+    handleMouseLeave,
+  } = useTranslation();
 
   useEffect(() => {
     setCurrentStreak(parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10));
@@ -38,64 +46,9 @@ const LevelResult = () => {
     }
   };
 
-  const copyToClipboardAndRedirect = (text) => {
-    // Copy to clipboard
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(text);
-    } else {
-      // Fallback for older browsers
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textarea);
-    }
-    // Redirect to ipa-reader.com
-    window.open("https://ipa-reader.com/", "_blank");
-  };
+
   
-  const playTextToSpeech = async (text, type = "right") => {
-    if (type === "wrong") {
-      copyToClipboardAndRedirect(text);
-      return;
-    }
   
-    if (isPlaying && audio) {
-      audio.pause();
-      audio.currentTime = 0;
-      setIsPlaying(false);
-      return;
-    }
-  
-    try {
-      const response = await fetch("http://localhost:8000/tts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ sentence: text }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to fetch TTS audio.");
-      }
-  
-      const blob = await response.blob();
-      const audioUrl = URL.createObjectURL(blob);
-  
-      const newAudio = new Audio(audioUrl);
-      newAudio.play();
-      setAudio(newAudio);
-      setIsPlaying(true);
-  
-      newAudio.onended = () => {
-        setIsPlaying(false);
-      };
-    } catch (error) {
-      console.error("Error playing TTS audio:", error);
-    }
-  };
   
   const renderFeedbackLine = (item, index) => {
     if (typeof item === 'string' && item === "PERFECT!") {
@@ -113,7 +66,7 @@ const LevelResult = () => {
           instead of{' '}
           <button
         className="word-button red"
-        onClick={() => playTextToSpeech(item.wrong_word, "wrong")}
+        onClick={() => copyToClipboardAndRedirect(item.wrong_word)}
           >{item.wrong_word}</button>.
         </span>
       );
@@ -132,11 +85,15 @@ const LevelResult = () => {
 
         {/* Sentence Section - Highlighted sentence from LLM */}
         <h2>Sentence:</h2>
-        <div className="sentence-container">
-          <p
+        <div className="sentence-container"
+        onMouseEnter={() => handleMouseEnter(sentence)}
+        onMouseLeave={handleMouseLeave}
+        title={showTranslation && translation ? translation : ""} >
+            
+          <div
             className="sentence-text"
             dangerouslySetInnerHTML={{ __html: sentence }} // Use the highlighted sentence from LLM
-          ></p>
+          ></div>
           <button
             className="speaker-button"
             onClick={() => playTextToSpeech(sentence, "right")}
@@ -147,7 +104,7 @@ const LevelResult = () => {
         </div>
 
         {/* Feedback Section */}
-        <h2>Feedback:</h2>
+        <h2>Suggestions:</h2>
         <div className="feedback-box">
           <ul className="feedback-list">
             {/* Check if feedback is an array before mapping */}

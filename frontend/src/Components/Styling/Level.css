@@ -59,6 +59,18 @@
     box-sizing: border-box;
     overflow-wrap: break-word; /* Ensure long words break to next line */
     word-break: break-word;    /* Prevent overflow on long words */
+    position: relative; /* Needed for absolute positioning of the button */
+  }
+
+  .speaker-button {
+    position: absolute;
+    top: 21px;
+    right: 16px;
+    padding: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
   }
 
   .sentence-text {

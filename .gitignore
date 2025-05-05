@@ -4,8 +4,9 @@
 frontend/node_modules/
 
 # Environment variables
-frontend/.env
-backend/.env
+#frontend/.env
+#backend/.env
+# Exposed api keys for docker usage
 
 # Testing
 coverage/
@@ -48,7 +49,7 @@ phonexa_env/
 *.wav
 backend/output.wav
 backend/services/gentle_alignment.json
-backend/services/wav2vec_transcription.json
+
 
 # Ignore model cache directory
 model_cache/
