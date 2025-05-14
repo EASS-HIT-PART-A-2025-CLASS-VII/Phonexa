@@ -29,6 +29,22 @@ services:
     networks:
       - default
 
+  llmteacher:
+    build:
+      context: ./LLMTeacher
+      dockerfile: ../llmteacher.dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./LLMTeacher:/app
+      - ./LLMTeacher/app/data:/app/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - default
+    depends_on:
+      - backend
+
 networks:
   default:
     driver: bridge

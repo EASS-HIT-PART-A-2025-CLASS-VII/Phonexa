@@ -94,8 +94,8 @@
   white-space: pre-line;
   overflow-wrap: break-word; /* Ensure text wraps within the box */
   word-break: break-word;    /* Prevent overflow on long words */
-  /* italic */
-  font-style: italic; 
+  padding-right: 48px; /* Add padding to prevent overlap with speaker-button */
+  font-style: italic; /* Italicize the text */
 }
 
 /* Speaker Button */

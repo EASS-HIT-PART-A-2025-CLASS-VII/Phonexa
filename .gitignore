@@ -4,9 +4,9 @@
 frontend/node_modules/
 
 # Environment variables
-#frontend/.env
-#backend/.env
-# Exposed api keys for docker usage
+frontend/.env
+backend/.env
+.env
 
 # Testing
 coverage/

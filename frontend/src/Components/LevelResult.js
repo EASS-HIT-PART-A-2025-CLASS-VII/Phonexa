@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Styling/LevelResult.css";
 import SpeakerIcon from "../ProjectImages/speaker.png";
 import { useEffect } from "react";
-import { getNextLevelSentence } from './NextLevel';
 import { useTranslation } from "./useTranslation";
 import { useTTS, copyToClipboardAndRedirect } from './useTTS';
 
@@ -35,16 +34,34 @@ const LevelResult = () => {
   };
 
   // Function to fetch a new sentence for the next level
-  const fetchNextLevel = async () => {
-    try {
-      // Clean the sentence from any HTML tags
-      const cleanSentence = sentence.replace(/<[^>]+>/g, "");
-      const parsedData = await getNextLevelSentence(cleanSentence, feedback);
-      navigate("/level", { state: { sentence: parsedData.sentence, sentence_ipa: parsedData.sentence_ipa } });
-    } catch (error) {
-      console.error("Error fetching new sentence:", error);
+const fetchNextLevel = async () => {
+  try {
+    // Clean the sentence from any HTML tags
+    const cleanSentence = sentence.replace(/<[^>]+>/g, "");
+    
+    // Call the LLMTeacher microservice directly
+    const response = await fetch("http://localhost:5000/generate-advanced-sentence", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        previous_sentence: cleanSentence,
+        feedback: feedback
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-  };
+
+    const parsedData = await response.json();
+    navigate("/level", { state: { sentence: parsedData.sentence, sentence_ipa: parsedData.sentence_ipa } });
+  } catch (error) {
+    console.error("Error fetching new sentence:", error);
+    navigate("/level", { state: { sentence: "Error generating sentence.", sentence_ipa: "Error generating IPA." } });
+  }
+};
 
 
   

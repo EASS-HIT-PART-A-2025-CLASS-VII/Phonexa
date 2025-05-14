@@ -79,6 +79,7 @@
     white-space: pre-line;
     overflow-wrap: break-word; /* Ensure text wraps within the box */
     word-break: break-word;    /* Prevent overflow on long words */
+    padding-right: 48px; /* Add padding to prevent overlap with speaker-button */
   }
   
   /* Recording Section */
