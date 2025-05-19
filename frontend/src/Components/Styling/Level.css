@@ -1,177 +1,222 @@
 /* General Layout */
 .game-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #E9DCD3 !important;
-    padding: 20px;
-  }
-  
-  .level-card {
-    background-color: #ffffff;
-    border-radius: 10px;
-    margin-top: -15px; /* Add margin to the top */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #E9DCD3 !important;
+  padding: 20px;
+}
 
-  /* current-streak */
+.level-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-top: -15px;
+  /* Add margin to the top */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+/* current-streak */
 .current-streak {
   font-size: 1em;
   color: #555;
   position: absolute;
-  top: 15px; /* Smaller value to position it at the top */
-  left: 15px; /* Smaller value to position it at the left */
+  top: 15px;
+  /* Smaller value to position it at the top */
+  left: 15px;
+  /* Smaller value to position it at the left */
   text-align: left;
   margin: 0;
 }
-  
-  /* Title and Instructions */
-  .title {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-    margin-top: -10px; /* Adjust this value to move the title higher */
-  }
-  
-  .instructions {
-    font-size: 1.2em;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  /* Sentence Section */
-  .sentence-box {
-    margin: 20px auto;
-    padding: 20px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 800px;
-    min-height: 80px;
-    box-sizing: border-box;
-    overflow-wrap: break-word; /* Ensure long words break to next line */
-    word-break: break-word;    /* Prevent overflow on long words */
-    position: relative; /* Needed for absolute positioning of the button */
-  }
 
-  .speaker-button {
-    position: absolute;
-    top: 21px;
-    right: 16px;
-    padding: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1;
-  }
+/* Title and Instructions */
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  margin-top: -10px;
+  /* Adjust this value to move the title higher */
+}
 
-  .sentence-text {
-    font-size: 1.5em;
-    color: #333;
-    white-space: pre-line;
-    overflow-wrap: break-word; /* Ensure text wraps within the box */
-    word-break: break-word;    /* Prevent overflow on long words */
-    padding-right: 48px; /* Add padding to prevent overlap with speaker-button */
-  }
-  
-  /* Recording Section */
-  .recording-container {
-    margin-top: 20px;
-  }
-  
-  .recording-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
+.instructions {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 20px;
+}
 
-  
+/* Sentence Section */
+.sentence-box {
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 800px;
+  min-height: 80px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  /* Ensure long words break to next line */
+  word-break: break-word;
+  /* Prevent overflow on long words */
+  position: relative;
+  /* Needed for absolute positioning of the button */
+}
 
-  
+.speaker-button {
+  position: absolute;
+  top: 21px;
+  right: 16px;
+  padding: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.sentence-text {
+  font-size: 1.5em;
+  color: #333;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  /* Ensure text wraps within the box */
+  word-break: break-word;
+  /* Prevent overflow on long words */
+  padding-right: 48px;
+  /* Add padding to prevent overlap with speaker-button */
+}
+
+/* Recording Section */
+.recording-container {
+  margin-top: 20px;
+}
+
+.recording-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+
+
+
 /* Placeholder for No Audio Available */
 .recording-placeholder {
-    min-height: 50px; /* Slightly decrease the height of the placeholder */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px; /* Add space between the placeholder and the record button */
-    color: #555;
-    font-size: 1.1em;
-  }
-  
-  /* Audio Player */
-  .audio-player {
-    width: 100%;
-    height: 50px; /* Slightly decrease the height of the audio player */
-    margin-top: 10px;
-  }
+  min-height: 50px;
+  /* Slightly decrease the height of the placeholder */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  /* Add space between the placeholder and the record button */
+  color: #555;
+  font-size: 1.1em;
+}
+
+/* Audio Player */
+.audio-player {
+  width: 100%;
+  height: 50px;
+  /* Slightly decrease the height of the audio player */
+  margin-top: 10px;
+}
 
 /* Recording Status */
 .recording-status {
-    color: red;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-top: 5px;
-    min-height: 24px; /* Reserve space for the recording status text */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: red;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-top: 5px;
+  min-height: 24px;
+  /* Reserve space for the recording status text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  /* Stack buttons vertically */
+  align-items: center;
+  /* Center buttons horizontally */
+  gap: 16px;
+  /* Reduce the gap between buttons (20% closer) */
+  margin-top: 10px;
+}
+
+.record-button {
+  margin-top: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+}
+
+.record-button:hover {
+  transform: scale(1.25);
+}
+
+.record-button-img {
+  width: 100px;
+  height: 100px;
+}
+
+.submit-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.inline-spinner {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #3498db;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  /* Buttons */
-  .button-container {
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: center; /* Center buttons horizontally */
-    gap: 16px; /* Reduce the gap between buttons (20% closer) */
-    margin-top: 10px;
+
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .record-button {
-    margin-top: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    padding: 10px;
-    border-radius: 50%;
-    border: none;
-    background-color: transparent;
-  }
-  
-  .record-button:hover {
-    transform: scale(1.25);
-  }
-  
-  .record-button-img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .submit-button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-  }
-  
-  .submit-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+}

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PlayPauseButton from "../ProjectImages/playpausebtn.png";
 import "./Styling/Level.css";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ const Level = () => {
   const sentence = location.state?.sentence || "No sentence provided.";
   const sentenceIPA = location.state?.sentence_ipa || "No IPA provided.";
   const [isRecording, setIsRecording] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState("");
   const mediaRecorderRef = useRef(null);
@@ -80,6 +81,7 @@ const Level = () => {
   };
 
   const uploadData = async () => {
+    setLoading(true);
     if (!audioBlob || !sentence) {
       alert("Please record audio first.");
       return;
@@ -89,7 +91,7 @@ const Level = () => {
 
     const formData = new FormData();
     formData.append("sentence", sentence);
-    formData.append ("sentenceIPA", sentenceIPA)
+    formData.append("sentenceIPA", sentenceIPA)
     formData.append("audio", audioBlob, "recording.wav");
 
     try {
@@ -100,21 +102,21 @@ const Level = () => {
 
       if (response.ok) {
         const data = await response.json();
-  
+
         // Extract the content from the LLM response
         const contentString = data.choices?.[0]?.message?.content;
         if (!contentString) {
           throw new Error("Invalid response format: Missing 'content' attribute.");
         }
-  
+
         // Parse the content string into a JSON object
         const parsedContent = JSON.parse(contentString);
-  
+
         // Extract and process the response content
         const score = parsedContent.score;
         const feedback = parsedContent.try_saying
         const sentence = parsedContent.highlighted_sentence.replace(/\\/g, ""); // Remove redundant slashes
-  
+
         // Navigate to the next page with the processed data
         navigate("/level-result", {
           state: {
@@ -130,6 +132,8 @@ const Level = () => {
       }
     } catch (error) {
       console.error("Error uploading data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -139,7 +143,7 @@ const Level = () => {
   return (
     <div className="game-page">
       <div className="level-card">
-      <div className="current-streak">Streak: {currentStreak}</div>
+        <div className="current-streak">Streak: {currentStreak}</div>
         <h1 className="title">Pronunciation Game</h1>
         <p className="instructions">Read the following sentence:</p>
         <div
@@ -152,12 +156,12 @@ const Level = () => {
           <button
             className="speaker-button"
             onClick={() => playTextToSpeech(sentence)}
-            
+
           >
             <img src={SpeakerIcon} alt="Speaker Icon" className="speaker-icon" />
           </button>
         </div>
-  
+
         <div className="recording-container">
           <h2 className="recording-title">Your Attempt</h2>
           <div className="recording-placeholder">
@@ -171,16 +175,22 @@ const Level = () => {
           </div>
           <p className="recording-status">{recordingStatus}</p>
         </div>
-  
+
         {/* Button Container */}
         <div className="button-container">
           <button onClick={toggleRecording} className={`record-button ${isRecording ? "recording" : ""}`}>
             <img src={PlayPauseButton} alt={isRecording ? "Stop Recording" : "Start Recording"} className="record-button-img" />
           </button>
-  
-          <button className="submit-button" onClick={uploadData} disabled={!audioBlob}>
+
+          <button className="submit-button" onClick={uploadData} disabled={!audioBlob || loading}>
             Submit
           </button>
+          {loading && (
+            <span className="inline-spinner">
+              <span className="spinner"></span>
+              Processing...
+            </span>
+          )}
         </div>
       </div>
     </div>

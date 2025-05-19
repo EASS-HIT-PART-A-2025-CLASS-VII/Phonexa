@@ -1,59 +1,59 @@
 {
-    "sentence": "A curious elephant can easily eat eight dozen peaches",
+    "sentence": "The quick brown fox jumps over the lazy dog",
     "word_alignments": [
         {
-            "IPA_word": "\u0259",
-            "user_phonemes": "\u0250",
-            "similarity": 95.19999999999999,
-            "word": "A"
-        },
-        {
-            "IPA_word": "kju\u02d0ri\u0259s",
-            "user_phonemes": "ku\u02d0\u0279i\u0259s",
-            "similarity": 85.71428571428572,
-            "word": "curious"
-        },
-        {
-            "IPA_word": "\u025bl\u026af\u0259nt",
-            "user_phonemes": "\u025bl\u026af\u0259nt",
-            "similarity": 85.71428571428572,
-            "word": "elephant"
-        },
-        {
-            "IPA_word": "k\u00e6n",
-            "user_phonemes": "k\u00e6n",
+            "IPA_word": "\u00f0\u0259",
+            "user_phonemes": "\u00f0\u0259",
             "similarity": 100.0,
-            "word": "can"
+            "word": "The"
         },
         {
-            "IPA_word": "i\u02d0z\u0259li",
-            "user_phonemes": "i\u02d0z\u026ali",
-            "similarity": 77.60000000000001,
-            "word": "easily"
-        },
-        {
-            "IPA_word": "i\u02d0t",
-            "user_phonemes": "i\u02d0t",
+            "IPA_word": "kw\u026ak",
+            "user_phonemes": "kw\u026ak",
             "similarity": 100.0,
-            "word": "eat"
+            "word": "quick"
         },
         {
-            "IPA_word": "e\u026at",
-            "user_phonemes": "e\u026at",
+            "IPA_word": "bra\u028an",
+            "user_phonemes": "b\u0279a\u028an",
             "similarity": 100.0,
-            "word": "eight"
+            "word": "brown"
         },
         {
-            "IPA_word": "d\u0259zn",
-            "user_phonemes": "d\u028cz\u0259n",
-            "similarity": 78.0,
-            "word": "dozen"
+            "IPA_word": "f\u0252ks",
+            "user_phonemes": "f\u0251\u02d0ks",
+            "similarity": 95.0,
+            "word": "fox"
         },
         {
-            "IPA_word": "pi\u02d0t\u0283\u026az",
-            "user_phonemes": "pi\u02d0t\u0283\u1d7bz",
+            "IPA_word": "d\u0292\u028cmps",
+            "user_phonemes": "d\u0292\u028cmps",
             "similarity": 100.0,
-            "word": "peaches"
+            "word": "jumps"
+        },
+        {
+            "IPA_word": "\u0259\u028av\u0259",
+            "user_phonemes": "o\u028av\u025a",
+            "similarity": 90.0,
+            "word": "over"
+        },
+        {
+            "IPA_word": "\u00f0\u0259",
+            "user_phonemes": "\u00f0\u0259",
+            "similarity": 100.0,
+            "word": "the"
+        },
+        {
+            "IPA_word": "le\u026azi",
+            "user_phonemes": "le\u026azi",
+            "similarity": 100.0,
+            "word": "lazy"
+        },
+        {
+            "IPA_word": "d\u0252\u0261",
+            "user_phonemes": "d\u0254\u0261",
+            "similarity": 98.4,
+            "word": "dog"
         }
     ]
 }
