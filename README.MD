@@ -9,6 +9,7 @@ Phonexa is an interactive web application that helps users improve their English
 - **AI-Powered Pronunciation Analysis**: Get detailed feedback on your pronunciation.
 - **Word-Level Feedback**: See exactly which words need improvement.
 - **Interactive Audio Guidance**: Listen to correct pronunciations of difficult words.
+- **Phonetic Pronunciation**: Hear proper phonetic pronunciations of challenging sounds.
 - **Hebrew Translation Hover**: View Hebrew translations of English sentences by hovering over them.
 - **Difficulty Progression**: System adapts to your skill level.
 - **Streak Tracking**: Monitor your progress with a streak counter.
@@ -17,9 +18,17 @@ Phonexa is an interactive web application that helps users improve their English
 
 - **Frontend**: React with audio recording capabilities
 - **Backend**: FastAPI server with Wav2Vec2 for pronunciation analysis
+- **LLMTeacher**: Dedicated microservice for sentence generation and phonetic pronunciation
 - **ML Model**: Facebook's wav2vec2-lv-60-espeak-cv-ft
 - **Containerization**: Docker & Docker Compose
-- **TTS**: Edge TTS for natural-sounding pronunciation examples & and IPA-Reader.com for phonetic realizations
+- **TTS**: Edge TTS for natural-sounding pronunciation examples & Azure Speech Services for phonetic pronunciations
+
+## Architecture
+
+Phonexa consists of three microservices:
+- **Frontend**: React-based user interface (port 3000)
+- **Backend**: Core pronunciation analysis service (port 8000)
+- **LLMTeacher**: Sentence generation and phonetic TTS service (port 5000)
 
 ## Installation & Setup
 
@@ -40,16 +49,21 @@ Phonexa is an interactive web application that helps users improve their English
     ```bash
     python download_model.py
     ```
-    This creates a `model_cache` directory containing the required ML model files.
+    This creates a model_cache directory containing the required ML model files.
 
-3. **Build and run with Docker**
+3. **Configure environment variables**
+    Create or update `.env` files in the appropriate directories with required API keys:
+    - For Azure Speech Services in .env
+
+4. **Build and run with Docker**
     ```bash
     docker-compose up --build
     ```
 
-4. **Access the application**
+5. **Access the application**
     - Frontend: [http://localhost:3000](http://localhost:3000)
     - Backend API: [http://localhost:8000](http://localhost:8000)
+    - LLMTeacher API: [http://localhost:5000](http://localhost:5000)
 
 ## Usage Guide
 
@@ -65,6 +79,7 @@ Phonexa is an interactive web application that helps users improve their English
 - **Recording Interface**: Records your pronunciation attempt.
 - **Feedback Panel**: Highlights pronunciation errors with specific improvement tips.
 - **Audio Playback**: Listen to both your attempt and the correct pronunciation.
+- **Phonetic Playback**: Hear how specific phonetic sounds should be pronounced.
 - **Navigation**: Retry current level or progress to the next challenge.
 
 ### Translation Feature
@@ -73,10 +88,11 @@ Hover over any sentence to see its Hebrew translation. This feature helps non-En
 
 ## Common Issues & Troubleshooting
 
-- **Docker Build Takes Too Long**: Pre-download the model with `download_model.py` before building.
-- **Backend Connection Failed**: Ensure port 8000 is not in use by another application.
+- **Docker Build Takes Too Long**: Pre-download the model with download_model.py before building.
+- **Backend Connection Failed**: Ensure ports 8000 and 5000 are not in use by other applications.
 - **Audio Recording Issues**: Check that your browser has microphone permissions.
 - **Missing Translations**: The translation API may have rate limits or connection issues.
+- **Phonetic Pronunciation Issues**: Verify Azure Speech credentials are properly configured.
 
 ## License
 
@@ -85,5 +101,6 @@ MIT
 ## Credits
 
 - **Speech processing**: Facebook Wav2Vec2
-- **Text-to-Speech**: Edge TTS & IPA-Reader.com
-- **Phoneme Alignment**: Custom implementation based on dynamic programming designed by me, engineered with the help of LLM 
+- **Text-to-Speech**: Edge TTS & Azure Speech Services
+- **Phoneme Alignment**: Custom implementation based on dynamic programming designed by me, engineered with the help of LLM
+- **Sentence Generation**: LLM-based dynamic content generation
