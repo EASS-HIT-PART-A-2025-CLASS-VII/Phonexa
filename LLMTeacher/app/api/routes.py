@@ -1,9 +1,11 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import Response
 from pydantic import BaseModel
+import traceback
 from app.services.LLMFeedback import analyze_pronunciation_with_llm
 from app.services.GenerateFirstSentence import generate_first_sentence
 from app.services.GenerateAdvancedSentence import generate_advanced_sentence
-from typing import List, Union
+from app.services.PhonemeTTS import generate_phoneme_audio_bytes
 
 
 router = APIRouter()
@@ -14,6 +16,9 @@ class AlignmentResultsRequest(BaseModel):
 class AdvancedSentenceRequest(BaseModel):
     previous_sentence: str
     feedback: object
+
+class PhonemeTTSRequest(BaseModel):
+    phonetic_word: str
 
 @router.get("/")
 async def read_root():
@@ -58,3 +63,30 @@ async def generate_advanced_sentence_route(request: AdvancedSentenceRequest):
     except Exception as e:
         print(f"Error processing request: {e}")  # Debug line
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/generate-phoneme-audio")
+async def generate_phoneme_audio_route(request: PhonemeTTSRequest):
+    try:
+        # Log the incoming request
+        print(f"Processing phoneme request for: {request.phonetic_word}")
+        
+        # Generate the phoneme audio bytes
+        audio_data = await generate_phoneme_audio_bytes(request.phonetic_word)
+        
+        # Log success
+        print(f"Successfully generated audio data: {len(audio_data)} bytes")
+        
+        # Return the audio data as a streamable response
+        return Response(
+            content=audio_data,
+            media_type="audio/mpeg",
+            headers={
+                "Content-Disposition": f"attachment; filename=phoneme.mp3"
+            }
+        )
+        
+    except Exception as e:
+        # Print the full stack trace for debugging
+        print(f"PHONEME TTS ERROR: {str(e)}")
+        print(f"FULL TRACEBACK: {traceback.format_exc()}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate phoneme audio: {str(e)}")

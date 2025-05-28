@@ -13,8 +13,8 @@ const LevelResult = () => {
   const [currentStreak, setCurrentStreak] = useState(
     parseInt(localStorage.getItem("phonexa_current_streak") || "0", 10)
   );
-  const { playTextToSpeech, isPlaying } = useTTS();
-  
+  const { playTextToSpeech, isPlaying, playPhonemeToSpeech, isPhonemeAudioPlaying } = useTTS();
+
   const {
     translation,
     showTranslation,
@@ -34,39 +34,39 @@ const LevelResult = () => {
   };
 
   // Function to fetch a new sentence for the next level
-const fetchNextLevel = async () => {
-  try {
-    // Clean the sentence from any HTML tags
-    const cleanSentence = sentence.replace(/<[^>]+>/g, "");
-    
-    // Call the LLMTeacher microservice directly
-    const response = await fetch("http://localhost:5000/generate-advanced-sentence", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        previous_sentence: cleanSentence,
-        feedback: feedback
-      }),
-    });
+  const fetchNextLevel = async () => {
+    try {
+      // Clean the sentence from any HTML tags
+      const cleanSentence = sentence.replace(/<[^>]+>/g, "");
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      // Call the LLMTeacher microservice directly
+      const response = await fetch("http://localhost:5000/generate-advanced-sentence", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          previous_sentence: cleanSentence,
+          feedback: feedback
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const parsedData = await response.json();
+      navigate("/level", { state: { sentence: parsedData.sentence, sentence_ipa: parsedData.sentence_ipa } });
+    } catch (error) {
+      console.error("Error fetching new sentence:", error);
+      navigate("/level", { state: { sentence: "Error generating sentence.", sentence_ipa: "Error generating IPA." } });
     }
-
-    const parsedData = await response.json();
-    navigate("/level", { state: { sentence: parsedData.sentence, sentence_ipa: parsedData.sentence_ipa } });
-  } catch (error) {
-    console.error("Error fetching new sentence:", error);
-    navigate("/level", { state: { sentence: "Error generating sentence.", sentence_ipa: "Error generating IPA." } });
-  }
-};
+  };
 
 
-  
-  
-  
+
+
+
   const renderFeedbackLine = (item, index) => {
     if (typeof item === 'string' && item === "PERFECT!") {
       return <span className="feedback-text perfect">{item}</span>;
@@ -76,21 +76,21 @@ const fetchNextLevel = async () => {
         <span className="feedback-text">
           Try saying{' '}
           <button
-        className="word-button green"
-        onClick={() => playTextToSpeech(item.en_word, "right")}
-        title={item.en_word}
+            className="word-button green"
+            onClick={() => playTextToSpeech(item.en_word, "right")}
+            title={item.en_word}
           >{item.right_word}</button>{' '}
           instead of{' '}
           <button
-        className="word-button red"
-        onClick={() => copyToClipboardAndRedirect(item.wrong_word)}
+            className="word-button red"
+            onClick={() => playPhonemeToSpeech(item.wrong_word)}
+            title="Click to hear phonetic pronunciation"
           >{item.wrong_word}</button>.
         </span>
       );
     }
     return <span className="feedback-text error">Invalid feedback format</span>;
   };
-
 
 
   return (
@@ -103,10 +103,10 @@ const fetchNextLevel = async () => {
         {/* Sentence Section - Highlighted sentence from LLM */}
         <h2>Sentence:</h2>
         <div className="sentence-container"
-        onMouseEnter={() => handleMouseEnter(sentence)}
-        onMouseLeave={handleMouseLeave}
-        title={showTranslation && translation ? translation : ""} >
-            
+          onMouseEnter={() => handleMouseEnter(sentence)}
+          onMouseLeave={handleMouseLeave}
+          title={showTranslation && translation ? translation : ""} >
+
           <div
             className="sentence-text"
             dangerouslySetInnerHTML={{ __html: sentence }} // Use the highlighted sentence from LLM
@@ -117,7 +117,7 @@ const fetchNextLevel = async () => {
           >
             <img src={SpeakerIcon} alt="Speaker Icon" className="speaker-icon" />
           </button>
-          
+
         </div>
 
         {/* Feedback Section */}
@@ -129,7 +129,7 @@ const fetchNextLevel = async () => {
               feedback.map((item, index) => (
                 <li key={index} className="feedback-item">
                   {renderFeedbackLine(item, index)}
-                  
+
                 </li>
               ))
             ) : (

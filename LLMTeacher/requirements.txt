@@ -4,4 +4,5 @@ python-dotenv
 pydantic
 httpx
 requests
-python-multipart 
+python-multipart
+azure-cognitiveservices-speech

@@ -44,7 +44,7 @@ async def convert_audio_file(audio_path, sentenceIPA, sentence):
         transcription = processor.batch_decode(predicted_ids)[0]
         phonemes = transcription.split()
         # Remove unwanted characters
-        sentenceIPA = sentenceIPA.replace("'", "").replace("ˈ", "").replace("ˌ", "")
+        sentenceIPA = sentenceIPA.replace("'", "").replace("ˈ", "").replace("ˌ", "").replace(".", "")
         print("Original SentenceIPA:\n", sentenceIPA)
         print("Phonemes from the recording:\n", phonemes)
 
