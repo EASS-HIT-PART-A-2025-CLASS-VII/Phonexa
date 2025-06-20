@@ -1,6 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import router as api_router
+import sys
+from app.tests.APIKeysTest import test_env_keys_exist
+
+
+try:
+    test_env_keys_exist()
+    print("All required API keys are present.")
+except AssertionError as e:
+    print(f"Environment variable check failed: {e}")
+    sys.exit(1)
+
 
 app = FastAPI()
 

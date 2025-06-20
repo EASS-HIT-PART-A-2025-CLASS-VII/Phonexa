@@ -1,35 +1,41 @@
 {
-    "sentence": "The elephant trumpets loudly while the hedgehog sniffs around the prickly bushes.",
+    "sentence": "The quick brown fox jumps over the lazy dog",
     "word_alignments": [
         {
             "IPA_word": "\u00f0\u0259",
-            "user_phonemes": "\u00f0\u026a",
-            "similarity": 94.0,
+            "user_phonemes": "\u00f0\u0259",
+            "similarity": 100.0,
             "word": "The"
         },
         {
-            "IPA_word": "\u025bl\u026af\u0259nt",
-            "user_phonemes": "\u025bl\u026af\u0259nt",
-            "similarity": 85.71428571428572,
-            "word": "elephant"
+            "IPA_word": "kw\u026ak",
+            "user_phonemes": "kw\u026ak",
+            "similarity": 100.0,
+            "word": "quick"
         },
         {
-            "IPA_word": "t\u0279\u028cmp\u026ats",
-            "user_phonemes": "t\u0279\u028cmp\u026ats",
-            "similarity": 100.0,
-            "word": "trumpets"
+            "IPA_word": "bra\u028an",
+            "user_phonemes": "bro\u028an",
+            "similarity": 98.8,
+            "word": "brown"
         },
         {
-            "IPA_word": "la\u028adli",
-            "user_phonemes": "la\u028adli",
-            "similarity": 100.0,
-            "word": "loudly"
+            "IPA_word": "f\u0252ks",
+            "user_phonemes": "fo\u028aks",
+            "similarity": 89.5,
+            "word": "fox"
         },
         {
-            "IPA_word": "wa\u026al",
-            "user_phonemes": "wa\u026al",
-            "similarity": 100.0,
-            "word": "while"
+            "IPA_word": "d\u0292\u028cmps",
+            "user_phonemes": "d\u0292amps",
+            "similarity": 93.60000000000001,
+            "word": "jumps"
+        },
+        {
+            "IPA_word": "\u0259\u028av\u0259",
+            "user_phonemes": "o\u028av\u025a",
+            "similarity": 90.0,
+            "word": "over"
         },
         {
             "IPA_word": "\u00f0\u0259",
@@ -38,40 +44,16 @@
             "word": "the"
         },
         {
-            "IPA_word": "h\u025bd\u0292h\u0252\u0261",
-            "user_phonemes": "h\u025bd\u0292h\u0254\u0261",
-            "similarity": 99.2,
-            "word": "hedgehog"
-        },
-        {
-            "IPA_word": "sn\u026afs",
-            "user_phonemes": "sn\u026afs",
+            "IPA_word": "le\u026azi",
+            "user_phonemes": "le\u026azi",
             "similarity": 100.0,
-            "word": "sniffs"
+            "word": "lazy"
         },
         {
-            "IPA_word": "\u0259\u0279a\u028and",
-            "user_phonemes": "\u0250\u0279a\u028and",
-            "similarity": 99.03999999999999,
-            "word": "around"
-        },
-        {
-            "IPA_word": "\u00f0\u0259",
-            "user_phonemes": "\u00f0\u0259",
-            "similarity": 100.0,
-            "word": "the"
-        },
-        {
-            "IPA_word": "p\u0279\u026akli",
-            "user_phonemes": "p\u0279\u026akli",
-            "similarity": 100.0,
-            "word": "prickly"
-        },
-        {
-            "IPA_word": "b\u028a\u0283\u026az",
-            "user_phonemes": "b\u028a\u0283\u026az",
-            "similarity": 100.0,
-            "word": "bushes"
+            "IPA_word": "d\u0252\u0261",
+            "user_phonemes": "d\u0254\u0261",
+            "similarity": 98.4,
+            "word": "dog"
         }
     ]
 }
