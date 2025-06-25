@@ -16,11 +16,19 @@ Phonexa is an interactive web application that helps users improve their English
 
 ## Demo
 
-See Phonexa in action! Watch this demonstration of the app's key features:
+🎥 **Watch Phonexa in Action!**
 
-[![Phonexa Demo](https://img.youtube.com/vi/NOBqmUZFIhg/0.jpg)](https://youtu.be/NOBqmUZFIhg)
+See how the AI pronunciation analysis works with real-time feedback and phonetic guidance:
 
-*Click the image above to watch the full demonstration video*
+<div align="center">
+
+[![Phonexa Demo - Click to Watch on YouTube](https://img.youtube.com/vi/NOBqmUZFIhg/maxresdefault.jpg)](https://youtu.be/NOBqmUZFIhg)
+
+**[▶️ Click here to watch the full demonstration](https://youtu.be/NOBqmUZFIhg)**
+
+*Note: Video opens in YouTube
+
+</div>
 
 ## Tech Stack
 
