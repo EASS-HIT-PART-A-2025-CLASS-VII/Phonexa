@@ -1,47 +1,11 @@
 {
-    "sentence": "The quick brown fox jumps over the lazy dog",
+    "sentence": "A lazy lion lay in the sun all day",
     "word_alignments": [
         {
-            "IPA_word": "\u00f0\u0259",
-            "user_phonemes": "\u00f0\u0259",
-            "similarity": 100.0,
-            "word": "The"
-        },
-        {
-            "IPA_word": "kw\u026ak",
-            "user_phonemes": "kw\u026ak",
-            "similarity": 100.0,
-            "word": "quick"
-        },
-        {
-            "IPA_word": "bra\u028an",
-            "user_phonemes": "bro\u028an",
-            "similarity": 98.8,
-            "word": "brown"
-        },
-        {
-            "IPA_word": "f\u0252ks",
-            "user_phonemes": "fo\u028aks",
-            "similarity": 89.5,
-            "word": "fox"
-        },
-        {
-            "IPA_word": "d\u0292\u028cmps",
-            "user_phonemes": "d\u0292amps",
-            "similarity": 93.60000000000001,
-            "word": "jumps"
-        },
-        {
-            "IPA_word": "\u0259\u028av\u0259",
-            "user_phonemes": "o\u028av\u025a",
+            "IPA_word": "\u0259",
+            "user_phonemes": "\u025b",
             "similarity": 90.0,
-            "word": "over"
-        },
-        {
-            "IPA_word": "\u00f0\u0259",
-            "user_phonemes": "\u00f0\u0259",
-            "similarity": 100.0,
-            "word": "the"
+            "word": "A"
         },
         {
             "IPA_word": "le\u026azi",
@@ -50,10 +14,46 @@
             "word": "lazy"
         },
         {
-            "IPA_word": "d\u0252\u0261",
-            "user_phonemes": "d\u0254\u0261",
-            "similarity": 98.4,
-            "word": "dog"
+            "IPA_word": "la\u026a\u0259n",
+            "user_phonemes": "la\u026aj\u0259",
+            "similarity": 75.0,
+            "word": "lion"
+        },
+        {
+            "IPA_word": "le\u026a",
+            "user_phonemes": "nle\u026a",
+            "similarity": 66.66666666666667,
+            "word": "lay"
+        },
+        {
+            "IPA_word": "\u026an",
+            "user_phonemes": "\u026an",
+            "similarity": 100.0,
+            "word": "in"
+        },
+        {
+            "IPA_word": "\u00f0\u0259",
+            "user_phonemes": "\u00f0\u0259",
+            "similarity": 100.0,
+            "word": "the"
+        },
+        {
+            "IPA_word": "s\u028cn",
+            "user_phonemes": "s\u028cn",
+            "similarity": 100.0,
+            "word": "sun"
+        },
+        {
+            "IPA_word": "\u0254\u02d0l",
+            "user_phonemes": "\u0254\u02d0l",
+            "similarity": 100.0,
+            "word": "all"
+        },
+        {
+            "IPA_word": "de\u026a",
+            "user_phonemes": "de\u026a",
+            "similarity": 100.0,
+            "word": "day"
         }
     ]
 }

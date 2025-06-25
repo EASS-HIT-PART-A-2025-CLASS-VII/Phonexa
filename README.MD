@@ -14,6 +14,14 @@ Phonexa is an interactive web application that helps users improve their English
 - **Difficulty Progression**: System adapts to your skill level.
 - **Streak Tracking**: Monitor your progress with a streak counter.
 
+## Demo
+
+See Phonexa in action! Watch this demonstration of the app's key features:
+
+[![Phonexa Demo](https://img.youtube.com/vi/NOBqmUZFIhg/0.jpg)](https://youtu.be/NOBqmUZFIhg)
+
+*Click the image above to watch the full demonstration video*
+
 ## Tech Stack
 
 - **Frontend**: React with audio recording capabilities
