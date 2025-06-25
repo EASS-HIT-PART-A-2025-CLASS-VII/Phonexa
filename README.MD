@@ -2,7 +2,9 @@
 
 Phonexa is an interactive web application that helps users improve their English pronunciation through AI-based feedback. The app records your voice, analyzes your pronunciation, and provides specific guidance on how to improve.
 
-<img src="https://github.com/EASS-HIT-PART-A-2025-CLASS-VII/Phonexa/blob/main/frontend/src/ProjectImages/PhonexaLogo.png?raw=true" alt="Phonexa Logo" width="200"/>
+<div align="center">
+<img src="https://github.com/EASS-HIT-PART-A-2025-CLASS-VII/Phonexa/blob/main/frontend/src/ProjectImages/PhonexaLogo.png?raw=true" alt="Phonexa Logo" width="400"/>
+</div>
 
 ## Features
 
@@ -25,8 +27,6 @@ See how the AI pronunciation analysis works with real-time feedback and phonetic
 [![Phonexa Demo - Click to Watch on YouTube](https://img.youtube.com/vi/NOBqmUZFIhg/maxresdefault.jpg)](https://youtu.be/NOBqmUZFIhg)
 
 **[▶️ Click here to watch the full demonstration](https://youtu.be/NOBqmUZFIhg)**
-
-*Note: Video opens in YouTube
 
 </div>
 
