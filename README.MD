@@ -67,7 +67,7 @@ Phonexa consists of three microservices:
     Create or update `.env` files in the appropriate directories with required API keys:
     - For Azure Speech Services in .env
     - For Mistral LLM key (Sentence Generation)
-    - For TOGETHER AI's LLM key (Feedback Generation)
+    - For OpenRouter API key (Feedback Generation)
 
 4. **Build and run with Docker**
     ```bash

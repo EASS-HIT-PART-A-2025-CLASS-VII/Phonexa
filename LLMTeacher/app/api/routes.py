@@ -31,9 +31,21 @@ async def health_check():
 @router.post("/analyze-pronunciation")
 async def analyze_pronunciation(request: AlignmentResultsRequest):
     try:
+        print(f"\n{'='*50}")
+        print(f"[ANALYZE-PRONUNCIATION] Received request")
+        print(f"[ANALYZE-PRONUNCIATION] Alignment results: {request.alignment_results}")
+        print(f"{'='*50}\n")
+        
         result = analyze_pronunciation_with_llm(request.alignment_results)
+        
+        print(f"\n{'='*50}")
+        print(f"[ANALYZE-PRONUNCIATION] LLM Result: {result}")
+        print(f"{'='*50}\n")
+        
         return result
     except Exception as e:
+        print(f"\n[ANALYZE-PRONUNCIATION] ERROR: {str(e)}")
+        print(f"[ANALYZE-PRONUNCIATION] TRACEBACK: {traceback.format_exc()}")
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.post("/generate-first-sentence")

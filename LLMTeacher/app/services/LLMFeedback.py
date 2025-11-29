@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from dotenv import load_dotenv
 
@@ -6,14 +7,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get the API key from the environment
-MISTRAL_API_KEY = os.getenv("FASTAPI_APP_API_KEY")
-TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY2")
+OPEN_ROUTER_API_KEY = os.getenv("OPEN_ROUTER_API_KEY")
 
-if not MISTRAL_API_KEY or not TOGETHER_API_KEY:
-    raise ValueError("Mistral API key not found. Please set it in the .env file.")
+if not OPEN_ROUTER_API_KEY:
+    raise ValueError("OpenRouter API key not found. Please set it in the .env file.")
 
 
 def analyze_pronunciation_with_llm(alignment_results):
+    print(f"\n{'='*50}")
+    print(f"[LLMFeedback] Starting pronunciation analysis")
+    print(f"[LLMFeedback] Input alignment_results: {alignment_results}")
+    print(f"{'='*50}\n")
 
     # Define the system and user messages for the LLM
     system_message = (
@@ -58,28 +62,60 @@ def analyze_pronunciation_with_llm(alignment_results):
     "- Use the `word` field from each entry to determine the English word to highlight in the sentence.\n"
     "- Return ONLY the raw JSON object with no additional commentary."
 )
-      # API call to Together's Llama-3-70B-Instruct-Turbo-Free
+    # API call to OpenRouter (openai/gpt-oss-20b:free)
+    print(f"[LLMFeedback] Sending request to OpenRouter API...")
+    print(f"[LLMFeedback] Model: openai/gpt-oss-20b:free")
     try:
         response = requests.post(
-            "https://api.together.xyz/v1/chat/completions",
+            "https://openrouter.ai/api/v1/chat/completions",
             headers={
-                "Authorization": f"Bearer {TOGETHER_API_KEY}",
-                "Content-Type": "application/json"
+                "Authorization": f"Bearer {OPEN_ROUTER_API_KEY}",
+                "Content-Type": "application/json",
+                "HTTP-Referer": "https://phonexa.app",
+                "X-Title": "Phonexa Pronunciation App"
             },
             json={
-                "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+                "model": "openai/gpt-oss-20b:free",
                 "messages": [
                     {"role": "system", "content": system_message},
                     {"role": "user", "content": user_message}
                 ],
-                "temperature": 0.5,
-                "max_tokens": 500,
-                "top_p": 1.0,
-                "stream": False
+                "temperature": 0.3,
+                "max_tokens": 2000,
+                "top_p": 1.0
             }
         )
+        print(f"[LLMFeedback] Response status code: {response.status_code}")
         response.raise_for_status()
-        return response.json()
+        result = response.json()
+        
+        print(f"[LLMFeedback] Raw API response: {result}")
+        
+        # Extract response content
+        response_text = result.get("choices", [{}])[0].get("message", {}).get("content", "")
+        print(f"[LLMFeedback] Extracted response_text: {response_text}")
+        
+        # Clean up response if wrapped in markdown code blocks
+        if response_text.startswith("```json"):
+            print(f"[LLMFeedback] Cleaning up markdown json wrapper")
+            response_text = response_text.replace("```json", "").replace("```", "").strip()
+        elif response_text.startswith("```"):
+            print(f"[LLMFeedback] Cleaning up markdown wrapper")
+            response_text = response_text.replace("```", "").strip()
+        
+        print(f"[LLMFeedback] Final cleaned response: {response_text}")
+        print(f"{'='*50}\n")
+        
+        return {
+            "choices": [{
+                "message": {
+                    "content": response_text
+                }
+            }]
+        }
     except requests.exceptions.RequestException as e:
-        print(f"Error in LLM API call: {e}")
+        print(f"\n{'='*50}")
+        print(f"[LLMFeedback] ERROR in OpenRouter API call: {e}")
+        print(f"[LLMFeedback] Response content: {getattr(e.response, 'text', 'N/A') if hasattr(e, 'response') else 'N/A'}")
+        print(f"{'='*50}\n")
         raise ValueError("Failed to get a response from the LLM.")

@@ -1,4 +1,6 @@
 # filepath: /home/liron/Phonexa/fastapi.dockerfile
+# syntax=docker/dockerfile:1
+# filepath: /home/liron/Phonexa/fastapi.dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -9,7 +11,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install -r requirements.txt
 
 # Set environment variables for HuggingFace cache
 ENV TRANSFORMERS_CACHE=/app/model_cache

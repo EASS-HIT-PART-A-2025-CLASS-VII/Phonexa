@@ -1,35 +1,47 @@
 {
-    "sentence": "A lazy lion lay in the sun all day",
+    "sentence": "The elegant giraffe gracefully munched leaves from the tall acacia tree.",
     "word_alignments": [
         {
-            "IPA_word": "\u0259",
-            "user_phonemes": "\u025b",
-            "similarity": 90.0,
-            "word": "A"
+            "IPA_word": "\u00f0\u0259",
+            "user_phonemes": "\u00f0\u025b",
+            "similarity": 95.0,
+            "word": "The"
         },
         {
-            "IPA_word": "le\u026azi",
-            "user_phonemes": "le\u026azi",
+            "IPA_word": "\u026al\u025b\u0261\u0259nt",
+            "user_phonemes": "l\u026a\u0261\u0259nt",
+            "similarity": 63.000000000000014,
+            "word": "elegant"
+        },
+        {
+            "IPA_word": "d\u0292\u0259r\u00e6f",
+            "user_phonemes": "d\u0292\u1d7b\u0279\u00e6f",
+            "similarity": 97.6,
+            "word": "giraffe"
+        },
+        {
+            "IPA_word": "\u0261\u0279e\u026asfl\u026a",
+            "user_phonemes": "\u0261\u0279e\u026asf\u028ali",
+            "similarity": 86.25,
+            "word": "gracefully"
+        },
+        {
+            "IPA_word": "m\u028cnt\u0283t",
+            "user_phonemes": "m\u028cnt\u0283t",
             "similarity": 100.0,
-            "word": "lazy"
+            "word": "munched"
         },
         {
-            "IPA_word": "la\u026a\u0259n",
-            "user_phonemes": "la\u026aj\u0259",
-            "similarity": 75.0,
-            "word": "lion"
+            "IPA_word": "l\u026avz",
+            "user_phonemes": "li\u02d0vz",
+            "similarity": 95.0,
+            "word": "leaves"
         },
         {
-            "IPA_word": "le\u026a",
-            "user_phonemes": "nle\u026a",
-            "similarity": 66.66666666666667,
-            "word": "lay"
-        },
-        {
-            "IPA_word": "\u026an",
-            "user_phonemes": "\u026an",
-            "similarity": 100.0,
-            "word": "in"
+            "IPA_word": "fr\u0259m",
+            "user_phonemes": "f\u0279\u028cm",
+            "similarity": 97.5,
+            "word": "from"
         },
         {
             "IPA_word": "\u00f0\u0259",
@@ -38,22 +50,22 @@
             "word": "the"
         },
         {
-            "IPA_word": "s\u028cn",
-            "user_phonemes": "s\u028cn",
+            "IPA_word": "t\u0254\u02d0l",
+            "user_phonemes": "t\u0254\u02d0l",
             "similarity": 100.0,
-            "word": "sun"
+            "word": "tall"
         },
         {
-            "IPA_word": "\u0254\u02d0l",
-            "user_phonemes": "\u0254\u02d0l",
-            "similarity": 100.0,
-            "word": "all"
+            "IPA_word": "\u0259ke\u026a\u0283\u0259",
+            "user_phonemes": "\u00e6k\u0250si\u0250",
+            "similarity": 71.10833333333333,
+            "word": "acacia"
         },
         {
-            "IPA_word": "de\u026a",
-            "user_phonemes": "de\u026a",
+            "IPA_word": "t\u0279i\u02d0",
+            "user_phonemes": "t\u0279i\u02d0",
             "similarity": 100.0,
-            "word": "day"
+            "word": "tree"
         }
     ]
 }
