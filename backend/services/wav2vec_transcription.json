@@ -1,47 +1,53 @@
 {
-    "sentence": "The elegant giraffe gracefully munched leaves from the tall acacia tree.",
+    "sentence": "The clever squirrel quickly hides its nuts in the thicket.",
     "word_alignments": [
         {
             "IPA_word": "\u00f0\u0259",
-            "user_phonemes": "\u00f0\u025b",
-            "similarity": 95.0,
+            "user_phonemes": "\u00f0\u0259",
+            "similarity": 100.0,
             "word": "The"
         },
         {
-            "IPA_word": "\u026al\u025b\u0261\u0259nt",
-            "user_phonemes": "l\u026a\u0261\u0259nt",
-            "similarity": 63.000000000000014,
-            "word": "elegant"
-        },
-        {
-            "IPA_word": "d\u0292\u0259r\u00e6f",
-            "user_phonemes": "d\u0292\u1d7b\u0279\u00e6f",
-            "similarity": 97.6,
-            "word": "giraffe"
-        },
-        {
-            "IPA_word": "\u0261\u0279e\u026asfl\u026a",
-            "user_phonemes": "\u0261\u0279e\u026asf\u028ali",
-            "similarity": 86.25,
-            "word": "gracefully"
-        },
-        {
-            "IPA_word": "m\u028cnt\u0283t",
-            "user_phonemes": "m\u028cnt\u0283t",
+            "IPA_word": "kl\u025bv\u0259r",
+            "user_phonemes": "kl\u025bv\u025a",
             "similarity": 100.0,
-            "word": "munched"
+            "word": "clever"
         },
         {
-            "IPA_word": "l\u026avz",
-            "user_phonemes": "li\u02d0vz",
-            "similarity": 95.0,
-            "word": "leaves"
+            "IPA_word": "skw\u025crl",
+            "user_phonemes": "skwi\u02d0\u0279\u025bl",
+            "similarity": 71.42857142857143,
+            "word": "squirrel"
         },
         {
-            "IPA_word": "fr\u0259m",
-            "user_phonemes": "f\u0279\u028cm",
-            "similarity": 97.5,
-            "word": "from"
+            "IPA_word": "kw\u026akli",
+            "user_phonemes": "kw\u026akli",
+            "similarity": 100.0,
+            "word": "quickly"
+        },
+        {
+            "IPA_word": "ha\u026adz",
+            "user_phonemes": "ha\u026adz",
+            "similarity": 100.0,
+            "word": "hides"
+        },
+        {
+            "IPA_word": "\u026ats",
+            "user_phonemes": "\u026ats",
+            "similarity": 100.0,
+            "word": "its"
+        },
+        {
+            "IPA_word": "n\u028cts",
+            "user_phonemes": "n\u028cts",
+            "similarity": 100.0,
+            "word": "nuts"
+        },
+        {
+            "IPA_word": "\u026an",
+            "user_phonemes": "\u026an",
+            "similarity": 100.0,
+            "word": "in"
         },
         {
             "IPA_word": "\u00f0\u0259",
@@ -50,22 +56,10 @@
             "word": "the"
         },
         {
-            "IPA_word": "t\u0254\u02d0l",
-            "user_phonemes": "t\u0254\u02d0l",
-            "similarity": 100.0,
-            "word": "tall"
-        },
-        {
-            "IPA_word": "\u0259ke\u026a\u0283\u0259",
-            "user_phonemes": "\u00e6k\u0250si\u0250",
-            "similarity": 71.10833333333333,
-            "word": "acacia"
-        },
-        {
-            "IPA_word": "t\u0279i\u02d0",
-            "user_phonemes": "t\u0279i\u02d0",
-            "similarity": 100.0,
-            "word": "tree"
+            "IPA_word": "\u03b8\u026ak\u026at",
+            "user_phonemes": "t\u026ak\u026at",
+            "similarity": 96.85000000000001,
+            "word": "thicket"
         }
     ]
 }

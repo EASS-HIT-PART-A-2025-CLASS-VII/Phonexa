@@ -11,7 +11,7 @@ IPA_FEATURES = {
     'e': [1, 1, 0, 0, 0],  # Close-mid front unrounded vowel
     'æ': [1, 3, 0, 0, 0],  # Near-open front unrounded vowel
     'ə': [1, 2, 1, 0, 0],  # Mid central vowel (schwa)
-    'ɚ': [1, 2, 1, 0, 1],  # R-colored schwa
+    'ɚ': [1, 2, 1, 0, 2],  # R-colored schwa (same as ə but rhoticized)
     'ɐ': [1, 3, 1, 0, 0],  # Near-open central vowel
     'ʌ': [1, 2, 2, 0, 0],  # Open-mid back unrounded vowel
     'ɑ': [1, 4, 2, 0, 0],  # Open back unrounded vowel
@@ -36,10 +36,11 @@ IPA_FEATURES = {
     'aʊ': [1, 3, 2, 1, 3],  # Diphthong type 4 - adjusted height to be closer to oʊ
     'oʊ': [1, 2, 2, 1, 3],  # Diphthong type 5 - adjusted height to be closer to aʊ
     'əʊ': [1, 2, 1, 0, 3],  # Diphthong type 6
-    # Rhoticized vowels
+    # Rhoticized vowels - these are equivalent to vowel + r
     'ɑːɹ': [1, 4, 2, 0, 2], # Rhoticized long open back unrounded vowel
     'ɔːɹ': [1, 3, 2, 1, 2], # Rhoticized long open-mid back rounded vowel
-    'ɝ': [1, 2, 1, 0, 2],   # Rhoticized mid central vowel
+    'ɝ': [1, 2, 1, 0, 2],   # Rhoticized mid central vowel (same as ɚ)
+    'ər': [1, 2, 1, 0, 2],  # Explicit schwa + r (same as ɚ)
     # Consonants
     'p': [0, 0, 0, 0, 0],
     'b': [0, 0, 0, 1, 0],
@@ -73,6 +74,25 @@ IPA_FEATURES = {
     'ən': [1, 2, 1, 0, 0],
 }
 
+# Phoneme equivalence mappings - these are considered the same sound
+PHONEME_EQUIVALENTS = {
+    'ɚ': ['ər', 'ɝ'],      # R-colored schwa variants
+    'ɝ': ['ɚ', 'ər'],      # R-colored schwa variants
+    'ər': ['ɚ', 'ɝ'],      # R-colored schwa variants
+    'r': ['ɹ'],            # R variants
+    'ɹ': ['r'],            # R variants
+    'g': ['ɡ'],            # G variants
+    'ɡ': ['g'],            # G variants
+    'i': ['iː'],           # Length variants (minor difference)
+    'iː': ['i'],
+    'u': ['uː'],
+    'uː': ['u'],
+    'ɑ': ['ɑː'],
+    'ɑː': ['ɑ'],
+    'ɔ': ['ɔː'],
+    'ɔː': ['ɔ'],
+}
+
 def phonetic_distance(a, b):
     """
     Calculate phonetic distance between two IPA symbols based on features.
@@ -80,6 +100,18 @@ def phonetic_distance(a, b):
     """
     if a == b:
         return 0.0
+    
+    # Check if phonemes are equivalent (e.g., ɚ == ər)
+    if a in PHONEME_EQUIVALENTS and b in PHONEME_EQUIVALENTS.get(a, []):
+        return 0.0
+    if b in PHONEME_EQUIVALENTS and a in PHONEME_EQUIVALENTS.get(b, []):
+        return 0.0
+    
+    # Special case: Compare compound phonemes like "ər" to single phonemes like "ɚ"
+    # ər (2 chars) vs ɚ (1 char) - these are the same sound
+    if (a == 'ə' and b == 'ɚ') or (a == 'ɚ' and b == 'ə'):
+        return 0.15  # Very small penalty - nearly the same
+    
     if a not in IPA_FEATURES or b not in IPA_FEATURES:
         return 1.0
     features_a = IPA_FEATURES[a]
